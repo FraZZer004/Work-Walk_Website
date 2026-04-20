@@ -10,6 +10,7 @@ import {
   Scale,
   Flame,
 } from 'lucide-react'
+import { asset } from '../utils/asset'
 import Hero from '../sections/Hero'
 import Features from '../sections/Features'
 import ShowcaseSection from '../sections/ShowcaseSection'
@@ -47,7 +48,7 @@ export default function Home() {
       <ShowcaseSection
         id="dashboard"
         side="right"
-        screenshot="/screenshot-home.png"
+        screenshot={asset('/screenshot-home.png')}
         screenshotAlt="Work&Walk Dashboard"
         badge="Dashboard"
         headline="Your workday,"
@@ -67,7 +68,7 @@ export default function Home() {
       <ShowcaseSection
         id="analytics"
         side="left"
-        screenshot="/screenshot-analyse.png"
+        screenshot={asset('/screenshot-analyse.png')}
         screenshotAlt="Work&Walk Analytics"
         badge="Analytics"
         headline="Your metrics."
@@ -88,7 +89,7 @@ export default function Home() {
       <ShowcaseSection
         id="salary"
         side="right"
-        screenshot="/screenshot-salary.png"
+        screenshot={asset('/screenshot-salary.png')}
         screenshotAlt="Work&Walk Salary"
         badge="Salary"
         headline="Finally know what you"
@@ -109,7 +110,7 @@ export default function Home() {
       <ShowcaseSection
         id="schedule"
         side="left"
-        screenshot="/screenshot-schedule.png"
+        screenshot={asset('/screenshot-schedule.png')}
         screenshotAlt="Work&Walk Schedule"
         badge="Schedule"
         headline="Your shifts,"
@@ -130,7 +131,7 @@ export default function Home() {
       <ShowcaseSection
         id="health"
         side="right"
-        screenshot="/screenshot-profile.png"
+        screenshot={asset('/screenshot-profile.png')}
         screenshotAlt="Work&Walk Health Profile"
         badge="Health"
         headline="Walk more."

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import DeviceFrame from '../components/DeviceFrame'
 import AppStoreBadge from '../components/AppStoreBadge'
+import { asset } from '../utils/asset'
 
 const ease = [0.16, 1, 0.3, 1]
 
@@ -114,7 +115,7 @@ export default function Hero() {
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           >
             <DeviceFrame
-              screenshot="/screenshot-home.png"
+              screenshot={asset('/screenshot-home.png')}
               alt="Work&Walk Dashboard"
               size="lg"
             />

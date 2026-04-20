@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import AppStoreBadge from './AppStoreBadge'
+import { asset } from '../utils/asset'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -37,7 +38,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 group">
           <img
-            src="/app-icon.jpg"
+            src={asset('/app-icon.jpg')}
             alt="Work&Walk"
             className="w-8 h-8 rounded-lg object-cover"
           />

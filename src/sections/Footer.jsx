@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { asset } from '../utils/asset'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -12,7 +13,7 @@ export default function Footer() {
         {/* Logo + tagline */}
         <div className="flex flex-col items-center sm:items-start gap-1">
           <Link to="/" className="flex items-center gap-2">
-            <img src="/app-icon.jpg" alt="Work&Walk" className="w-6 h-6 rounded-lg object-cover" />
+            <img src={asset('/app-icon.jpg')} alt="Work&Walk" className="w-6 h-6 rounded-lg object-cover" />
             <span className="font-display font-bold text-sm">
               Work<span className="text-gradient-orange">&</span>Walk
             </span>

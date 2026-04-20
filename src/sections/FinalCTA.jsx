@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Star } from 'lucide-react'
 import AppStoreBadge from '../components/AppStoreBadge'
+import { asset } from '../utils/asset'
 
 const ease = [0.16, 1, 0.3, 1]
 
@@ -38,7 +39,7 @@ export default function FinalCTA() {
             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
           >
             <img
-              src="/app-icon.jpg"
+              src={asset('/app-icon.jpg')}
               alt="Work&Walk"
               className="w-24 h-24 rounded-[28px] glow-orange-sm"
               style={{ boxShadow: '0 0 40px rgba(255,128,0,0.25), 0 20px 60px rgba(0,0,0,0.6)' }}
