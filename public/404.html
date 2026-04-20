@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <!--
+    Single-page app redirect for GitHub Pages.
+    When GitHub Pages returns 404 for a deep route (/privacy, /support),
+    this page encodes the URL and redirects to index.html, where the
+    inline script below decodes it back so React Router can handle it.
+    pathSegmentsToKeep = 1 keeps the repo name segment (/Work-Walk_Website).
+  -->
+  <script>
+    var pathSegmentsToKeep = 1;
+    var l = window.location;
+    l.replace(
+      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+      l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+      (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+      l.hash
+    );
+  </script>
+</head>
+<body></body>
+</html>
