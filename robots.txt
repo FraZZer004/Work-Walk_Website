@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://workandwalk.app/sitemap.xml
