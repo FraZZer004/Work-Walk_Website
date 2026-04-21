@@ -12,7 +12,7 @@ export default function AnimatedCounter({
   className = '',
 }) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const isInView = useInView(ref, { once: true, margin: '0px' })
   const [display, setDisplay] = useState(from)
 
   useEffect(() => {
