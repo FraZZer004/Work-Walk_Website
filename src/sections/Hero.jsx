@@ -14,15 +14,6 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
 }
 
-function StatPill({ value, label }) {
-  return (
-    <div className="flex flex-col items-center gap-0.5">
-      <span className="font-mono font-medium text-base text-[#FF8000]">{value}</span>
-      <span className="text-xs text-white/35 font-sans">{label}</span>
-    </div>
-  )
-}
-
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
@@ -89,17 +80,21 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          {/* Stats row */}
+          {/* Feature pills */}
           <motion.div
             variants={item}
-            className="flex items-center gap-5 pt-2 border-t"
+            className="flex flex-wrap items-center gap-2 pt-2 border-t"
             style={{ borderColor: 'rgba(255,255,255,0.07)' }}
           >
-            <StatPill value="32,820" label="steps tracked" />
-            <div className="w-px h-6" style={{ background: 'rgba(255,255,255,0.08)' }} />
-            <StatPill value="61h" label="shifts logged" />
-            <div className="w-px h-6" style={{ background: 'rgba(255,255,255,0.08)' }} />
-            <StatPill value="$559" label="calculated" />
+            {['Steps & calories', 'Shift scheduling', 'Net salary', 'Apple Health sync'].map(label => (
+              <span
+                key={label}
+                className="text-xs font-mono px-3 py-1 rounded-full"
+                style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.4)', border: '1px solid rgba(255,255,255,0.07)' }}
+              >
+                {label}
+              </span>
+            ))}
           </motion.div>
         </motion.div>
 

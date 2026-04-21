@@ -79,7 +79,7 @@ export default function Home() {
           { icon: Heart, title: 'Heart rate tracking', desc: 'Monitor your exertion across every work session.', color: '#FF2D55' },
           { icon: BarChart2, title: 'Weekly navigation', desc: 'Browse any past week with a simple ← → swipe.', color: '#34C759' },
         ]}
-        counter={{ to: 32820, label: 'steps tracked this week', prefix: '' }}
+        counter={{ to: 32820, label: 'example — steps tracked in a week', prefix: '' }}
         bgGlow="none"
       />
 
@@ -100,7 +100,7 @@ export default function Home() {
           { icon: FileText, title: 'Export PDF', desc: 'One-tap monthly report, ready to share or archive.', color: '#007AFF' },
           { icon: BarChart2, title: 'Month navigation', desc: 'Browse any previous month with clean history.', color: '#FF9500' },
         ]}
-        counter={{ to: 559.05, decimals: 2, prefix: '$', label: 'estimated net salary this month' }}
+        counter={{ to: 559.05, decimals: 2, prefix: '$', label: 'example — estimated net salary for a month' }}
         bgGlow="gold"
       />
 
@@ -121,7 +121,7 @@ export default function Home() {
           { icon: Wand2, title: 'Magic fill', desc: 'Smart auto-complete fills your recurring schedule instantly.', color: '#FF9900' },
           { icon: FileText, title: 'List view', desc: 'Prefer a list? Switch with one tap and see all shifts cleanly.', color: '#32ADE6' },
         ]}
-        counter={{ to: 61, suffix: 'h', label: 'hours logged this month' }}
+        counter={{ to: 61, suffix: 'h', label: 'example — hours logged in a month' }}
         bgGlow="none"
       />
 
