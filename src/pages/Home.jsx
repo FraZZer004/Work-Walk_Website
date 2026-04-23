@@ -14,6 +14,8 @@ import { asset } from '../utils/asset'
 import Hero from '../sections/Hero'
 import Features from '../sections/Features'
 import ShowcaseSection from '../sections/ShowcaseSection'
+import WatchSection from '../sections/WatchSection'
+import WidgetSection from '../sections/WidgetSection'
 import Trophies from '../sections/Trophies'
 import Premium from '../sections/Premium'
 import FinalCTA from '../sections/FinalCTA'
@@ -147,7 +149,17 @@ export default function Home() {
 
       <Divider />
 
-      {/* 8. Trophies */}
+      {/* 8. Apple Watch */}
+      <WatchSection />
+
+      <Divider />
+
+      {/* 9. Widget iOS */}
+      <WidgetSection />
+
+      <Divider />
+
+      {/* 10. Trophies */}
       <Trophies />
 
       <Divider />
