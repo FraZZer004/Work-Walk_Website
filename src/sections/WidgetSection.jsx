@@ -8,20 +8,20 @@ const features = [
   {
     icon: Eye,
     color: '#FF8000',
-    title: 'Tout d\'un coup d\'œil',
-    desc: 'Pas, heures, calories et salaire — visibles sans déverrouiller, sans ouvrir l\'app.',
+    title: 'Everything at a glance',
+    desc: 'Steps, hours, calories, and salary — visible without unlocking, without opening the app.',
   },
   {
     icon: LayoutGrid,
     color: '#FF9500',
-    title: 'Barre de progression vers l\'objectif',
-    desc: 'La jauge orange indique visuellement où vous en êtes par rapport à vos 10 000 pas.',
+    title: 'Progress bar toward your goal',
+    desc: 'The orange gauge shows exactly where you stand against your 10,000-step target.',
   },
   {
     icon: RefreshCw,
     color: '#34C759',
-    title: 'Rafraîchissement automatique',
-    desc: 'Le widget se met à jour toutes les 15 minutes en arrière-plan. Toujours à jour, jamais intrusif.',
+    title: 'Auto-refresh, always up to date',
+    desc: 'The widget updates every 15 minutes in the background. Always current, never intrusive.',
   },
 ]
 
@@ -112,17 +112,17 @@ export default function WidgetSection() {
                 <LayoutGrid size={13} style={{ color: '#FF8000' }} />
               </div>
               <span className="text-xs font-mono uppercase tracking-[0.14em]" style={{ color: 'rgba(255,128,0,0.7)' }}>
-                Widget iOS
+                iOS Widget
               </span>
             </div>
 
             <h2 className="font-display font-bold text-white" style={{ fontSize: 'clamp(28px, 4vw, 48px)', lineHeight: 1.08 }}>
-              Votre journée,<br />
-              <span className="text-gradient-orange">visible en un regard.</span>
+              Your day,<br />
+              <span className="text-gradient-orange">seen in a second.</span>
             </h2>
 
             <p className="text-base leading-relaxed max-w-md" style={{ color: 'var(--text-secondary)' }}>
-              Ajoutez le widget medium à votre écran d'accueil : pas, heures, calories et salaire du jour — sans ouvrir l'app, sans geste superflu.
+              Add the medium widget to your home screen: steps, hours, calories, and today's salary — no app, no tap, no effort.
             </p>
 
             <div className="flex flex-col gap-4 mt-2">

@@ -8,20 +8,20 @@ const features = [
   {
     icon: Footprints,
     color: '#FF8000',
-    title: 'Steps & progress — sans l\'iPhone',
-    desc: 'La Watch lit directement le capteur via HealthKit. Pas besoin d\'avoir le téléphone en poche.',
+    title: 'Steps & progress — no iPhone needed',
+    desc: 'The Watch reads the sensor directly via HealthKit. Leave your phone at your desk.',
   },
   {
     icon: Zap,
     color: '#FF9500',
-    title: 'Heures et salaire synchronisés',
-    desc: 'Shifts et salaire estimé remontent automatiquement depuis l\'iPhone via WatchConnectivity.',
+    title: 'Hours & salary synced automatically',
+    desc: 'Shifts and estimated salary sync seamlessly from your iPhone via WatchConnectivity.',
   },
   {
     icon: RefreshCw,
     color: '#34C759',
-    title: 'Mise à jour en arrière-plan',
-    desc: 'Les données se rafraîchissent toutes les ~15 min sans ouvrir l\'app. Un bouton manuel est aussi disponible.',
+    title: 'Background refresh, always current',
+    desc: 'Data updates every ~15 min without opening the app. A manual refresh button is also available.',
   },
 ]
 
@@ -126,17 +126,17 @@ export default function WatchSection() {
                 <Watch size={13} style={{ color: '#FF8000' }} />
               </div>
               <span className="text-xs font-mono uppercase tracking-[0.14em]" style={{ color: 'rgba(255,128,0,0.7)' }}>
-                Apple Watch
+                Apple Watch app
               </span>
             </div>
 
             <h2 className="font-display font-bold text-white" style={{ fontSize: 'clamp(28px, 4vw, 48px)', lineHeight: 1.08 }}>
-              Tout sur le poignet.<br />
-              <span className="text-gradient-orange">Sans sortir le téléphone.</span>
+              Everything on your wrist.<br />
+              <span className="text-gradient-orange">Phone stays in your pocket.</span>
             </h2>
 
             <p className="text-base leading-relaxed max-w-md" style={{ color: 'var(--text-secondary)' }}>
-              L'app Watch affiche en temps réel les pas du jour, les calories, les heures travaillées et le salaire estimé — directement depuis votre poignet.
+              The Watch app shows your steps, calories, hours worked, and estimated salary in real time — right on your wrist, all day long.
             </p>
 
             <div className="flex flex-col gap-4 mt-2">
