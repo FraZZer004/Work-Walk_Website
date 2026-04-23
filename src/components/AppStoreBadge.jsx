@@ -1,5 +1,4 @@
-// App Store download button — update APP_STORE_URL when live
-const APP_STORE_URL = '#appstore'
+const APP_STORE_URL = 'https://apps.apple.com/fr/app/work-walk/id6759506295'
 
 // Apple logo SVG path (standard icon)
 function AppleLogo({ size = 18 }) {
