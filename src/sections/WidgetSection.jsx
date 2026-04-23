@@ -31,9 +31,12 @@ function WidgetFrame({ src, alt }) {
       {/* Glow behind widget */}
       <div style={{
         position: 'absolute',
-        inset: '-25%',
-        background: 'radial-gradient(ellipse at 60% 40%, rgba(255,100,0,0.18) 0%, rgba(255,40,0,0.06) 50%, transparent 70%)',
+        top: '50%', left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '260%', height: '400%',
+        background: 'radial-gradient(ellipse at 50% 50%, rgba(255,100,0,0.20) 0%, rgba(255,60,0,0.08) 30%, transparent 65%)',
         pointerEvents: 'none',
+        zIndex: 0,
       }} />
 
       {/* Widget frame */}
@@ -41,7 +44,7 @@ function WidgetFrame({ src, alt }) {
         padding: 1.5,
         borderRadius: 28,
         background: 'linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.12) 100%)',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.5), 0 24px 60px rgba(0,0,0,0.65), 0 0 70px rgba(255,90,0,0.12)',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.5), 0 24px 60px rgba(0,0,0,0.65)',
         position: 'relative',
         zIndex: 1,
       }}>
