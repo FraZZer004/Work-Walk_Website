@@ -10,7 +10,7 @@ const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) 
 const easeOut = (t) => 1 - Math.pow(1 - t, 4)
 
 /** Where the phone rests for each step of the page, for the current viewport. */
-function restingPoses(count, { width, height, heroBottom, reduced }) {
+function restingPoses(count, { width, height, heroBottom, textTop, reduced }) {
   const unit = VISIBLE_HEIGHT / height // world units per CSS pixel
   const poses = []
 
@@ -30,14 +30,17 @@ function restingPoses(count, { width, height, heroBottom, reduced }) {
   }
 
   // Phone: the hero shows the top of the device under the text, then it moves up and shrinks.
+  // No full turn here: on a small screen it would sweep over the text.
   const heroScale = Math.min(1.08, (width * unit * 0.82) / 0.716)
   const heroTop = clamp(heroBottom / height, 0.3, 0.8)
-  const stepScale = Math.min(0.68, (width * unit * 0.58) / 0.716)
-  const stepTop = 86 / height
+  // Then it sits between the navigation bar and the pinned text.
+  const stepTop = 82
+  const room = (textTop ?? height * 0.6) - 8 - stepTop
+  const stepScale = Math.min(0.8, (width * unit * 0.66) / 0.716, (room * unit) / 1.5)
   for (let i = 0; i < count; i++) {
     poses.push(i === 0
       ? { x: 0, y: VISIBLE_HEIGHT / 2 - heroTop * VISIBLE_HEIGHT - 0.75 * heroScale, scale: heroScale, rx: 0.16, ry: reduced ? 0 : -0.24, rz: 0 }
-      : { x: 0, y: VISIBLE_HEIGHT / 2 - stepTop * VISIBLE_HEIGHT - 0.75 * stepScale, scale: stepScale, rx: 0.05, ry: reduced ? 0 : (i % 2 ? 0.2 : -0.2) + TURN, rz: 0 })
+      : { x: 0, y: VISIBLE_HEIGHT / 2 - stepTop * unit - 0.75 * stepScale, scale: stepScale, rx: 0.04, ry: reduced ? 0 : (i % 2 ? 0.16 : -0.16), rz: 0 })
   }
   return poses
 }
@@ -60,10 +63,9 @@ export function mountPhoneStage(canvas, { reduced = false, onReady } = {}) {
   let stepScreens = []     // for each step, the index of its texture
   let textures = []
   let poses = []
-  let layout = { width: 1, height: 1, heroBottom: 0 }
-  // The part of the scroll between two steps during which the phone travels. On phones the
-  // text slides over the device, so it waits until the previous card has gone past.
-  let travelWindow = [0.16, 0.66]
+  let layout = { width: 1, height: 1, heroBottom: 0, textTop: null }
+  // The part of the scroll between two steps during which the phone travels.
+  let mobile = false
   let target = 0           // scroll progress, in steps
   let progress = 0         // the same, smoothed
   let visible = false
@@ -84,7 +86,7 @@ export function mountPhoneStage(canvas, { reduced = false, onReady } = {}) {
     camera.updateProjectionMatrix()
     layout = { ...layout, width, height }
     poses = restingPoses(stepScreens.length, { ...layout, reduced })
-    travelWindow = width >= 768 ? [0.16, 0.66] : [0.5, 0.94]
+    mobile = width < 768
   }
 
   const render = (now) => {
@@ -97,13 +99,15 @@ export function mountPhoneStage(canvas, { reduced = false, onReady } = {}) {
     progress = reduced ? target : lerp(progress, target, 1 - Math.exp(-dt * 11))
     const max = poses.length - 1
     const index = Math.min(Math.floor(clamp(progress, 0, max)), Math.max(0, max - 1))
-    const t = max > 0 ? easeInOut(smoothstep(travelWindow[0], travelWindow[1], progress - index)) : 0
+    // On phones the device must have left the hero before the pinned text appears (at half-way).
+    const travel = !mobile ? [0.16, 0.66] : index === 0 ? [0.04, 0.5] : [0.25, 0.75]
+    const t = max > 0 ? easeInOut(smoothstep(travel[0], travel[1], progress - index)) : 0
     const from = poses[index]
     const to = poses[Math.min(index + 1, max)]
 
     if (from && to) {
       const intro = reduced ? 1 : easeOut(clamp((now - introStart) / 1900))
-      const travel = Math.sin(Math.PI * t)
+      const lift = Math.sin(Math.PI * t)
 
       // Decorative pointer tracking: a spring, so the phone has a little momentum.
       if (!reduced) {
@@ -118,7 +122,7 @@ export function mountPhoneStage(canvas, { reduced = false, onReady } = {}) {
       object.position.set(
         lerp(from.x, to.x, t),
         lerp(from.y, to.y, t) + Math.sin(time * 0.9) * 0.012 * idle - (1 - intro) * 1.5,
-        travel * 0.25,
+        lift * 0.25,
       )
       object.rotation.set(
         lerp(from.rx, to.rx, t) + tilt.y * 0.09 + Math.sin(time * 0.7) * 0.012 * idle,

@@ -23,6 +23,7 @@ export default function Showcase() {
   const wrapRef = useRef(null)
   const canvasRef = useRef(null)
   const heroTextRef = useRef(null)
+  const panelRef = useRef(null)
   const stepRefs = useRef([])
   const stageRef = useRef(null)
   const metrics = useRef({ top: 0, tops: [] })
@@ -36,7 +37,11 @@ export default function Showcase() {
     if (!wrap) return
     const top = wrap.getBoundingClientRect().top
     metrics.current = { top: top + window.scrollY, tops: stepRefs.current.map((step) => step.offsetTop) }
-    stageRef.current?.setLayout({ heroBottom: heroTextRef.current.getBoundingClientRect().bottom - top + 30 })
+    stageRef.current?.setLayout({
+      heroBottom: heroTextRef.current.getBoundingClientRect().bottom - top + 30,
+      // On phones the text is pinned at the bottom: the device must fit above it.
+      textTop: panelRef.current?.offsetParent ? panelRef.current.offsetTop : null,
+    })
   }, [])
 
   // Scroll position, expressed in steps: 2.5 is halfway between the second and third tab.
@@ -55,7 +60,9 @@ export default function Showcase() {
   useEffect(() => {
     langRef.current = lang
     stageRef.current?.setScreens(SCREENS.map((id) => screenUrl(id, lang)), STEP_SCREENS)
-  }, [lang])
+    const frame = requestAnimationFrame(measure) // the pinned text may have changed height
+    return () => cancelAnimationFrame(frame)
+  }, [lang, measure])
 
   useEffect(() => {
     const wrap = wrapRef.current
@@ -93,6 +100,10 @@ export default function Showcase() {
   const tabBarVisible = active >= 1 && active <= tabs.length
   const titleWords = t.hero.title[0].split(' ')
   // Without WebGL the screenshots are shown in the page; they are always there for print.
+  // On phones the text of each step is pinned under the device and swaps in place; the copies
+  // in the scrolling flow stay for screen readers and print. Without WebGL they are shown as cards.
+  const pinned = status !== 'off'
+  const card = pinned ? 'screen-sm-sr-only' : 'max-md:glass max-md:bg-[rgba(20,18,16,0.84)]'
   const shot = (wide) => (status === 'off' ? `mt-6 ${wide} rounded-[2rem] border border-white/15` : 'print-shot hidden')
 
   return (
@@ -113,6 +124,55 @@ export default function Showcase() {
           </div>
         )}
 
+
+        {pinned && (
+          <div className="absolute inset-x-0 top-0 flex h-[100svh] flex-col justify-end md:hidden" aria-hidden="true">
+            <div
+              ref={panelRef}
+              className={`grid items-end px-5 pb-[4.75rem] transition-opacity duration-300 ${active >= 1 ? 'opacity-100' : 'opacity-0'}`}
+            >
+              {tabs.map((tab, index) => {
+                const Icon = TAB_ICONS[tab.id]
+                return (
+                  <div key={tab.id} className={`panel-step col-start-1 row-start-1 ${active === index + 1 ? 'is-active' : ''}`}>
+                    <p className="eyebrow flex items-center gap-2">
+                      <Icon className="h-4 w-4" strokeWidth={2.4} />
+                      <span className="tabular-nums">{String(index + 1).padStart(2, '0')}</span>
+                      <span className="h-px w-5 bg-accent/50" />
+                      {tab.label}
+                    </p>
+                    <p className="title mt-2.5 text-[1.625rem]">{tab.title}</p>
+                    <ul className="mt-3.5 space-y-2 text-[0.9375rem]">
+                      {tab.points.map((point) => (
+                        <li key={point} className="flex items-start gap-2.5">
+                          <Check className="mt-0.5 h-[1.125rem] w-[1.125rem] shrink-0 text-accent" strokeWidth={2.5} />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )
+              })}
+              <div className={`panel-step col-start-1 row-start-1 ${active === tabs.length + 1 ? 'is-active is-in' : ''}`}>
+                <p className="eyebrow">{t.goals.eyebrow}</p>
+                <p className="title mt-2.5 text-[1.625rem]">{t.goals.title}</p>
+                <ul className="mt-4 grid grid-cols-2 gap-x-5 gap-y-3">
+                  {t.goals.items.map((item, index) => (
+                    <li key={item.label}>
+                      <div className="flex items-end justify-between gap-2">
+                        <span className="text-sm font-semibold">{item.name}</span>
+                        <span className="font-rounded text-sm font-bold tabular-nums" style={{ color: item.color }}>{Math.round(item.value * 100)}%</span>
+                      </div>
+                      <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white/10">
+                        <div className="bar-fill h-full rounded-full" style={{ background: item.color, '--v': item.value, '--d': `${index * 60}ms` }} />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* The text, scrolling over the pinned layer */}
@@ -162,9 +222,9 @@ export default function Showcase() {
               key={tab.id}
               id={index === 0 ? 'features' : undefined}
               ref={(el) => { stepRefs.current[index + 1] = el }}
-              className="print-flow mx-auto flex min-h-[100svh] max-w-6xl items-end px-3 pb-[5.25rem] md:items-center md:px-5 md:pb-0"
+              className="print-flow mx-auto flex min-h-[80svh] max-w-6xl items-end px-3 pb-[5.25rem] md:min-h-[100svh] md:items-center md:px-5 md:pb-0"
             >
-              <Reveal className={`fade-exit max-md:glass pointer-events-auto w-full rounded-[26px] p-5 max-md:bg-[rgba(20,18,16,0.84)] md:w-[41%] md:p-0 ${index % 2 === 0 ? 'md:ml-auto motion-reduce:md:ml-0' : ''}`}>
+              <Reveal className={`fade-exit pointer-events-auto w-full rounded-[26px] p-5 md:w-[41%] md:p-0 ${card} ${index % 2 === 0 ? 'md:ml-auto motion-reduce:md:ml-0' : ''}`}>
                 <p className="eyebrow flex items-center gap-2">
                   <Icon className="h-4 w-4" strokeWidth={2.4} aria-hidden="true" />
                   <span className="tabular-nums">{String(index + 1).padStart(2, '0')}</span>
@@ -189,9 +249,9 @@ export default function Showcase() {
 
         <section
           ref={(el) => { stepRefs.current[tabs.length + 1] = el }}
-          className="print-flow mx-auto flex min-h-[100svh] max-w-6xl items-end px-3 pb-[5.25rem] md:items-center md:px-5 md:pb-0"
+          className="print-flow mx-auto flex min-h-[80svh] max-w-6xl items-end px-3 pb-[5.25rem] md:min-h-[100svh] md:items-center md:px-5 md:pb-0"
         >
-          <Reveal className="fade-exit max-md:glass pointer-events-auto w-full rounded-[26px] p-5 max-md:bg-[rgba(20,18,16,0.84)] md:w-[46%] md:p-0">
+          <Reveal className={`fade-exit pointer-events-auto w-full rounded-[26px] p-5 md:w-[46%] md:p-0 ${card}`}>
             <p className="eyebrow">{t.goals.eyebrow}</p>
             <h2 className="title mt-3 text-[clamp(1.55rem,3.7vw,3.1rem)] md:mt-4">{t.goals.title}</h2>
             <p className="lede mt-5 hidden text-lg md:block">{t.goals.lede}</p>

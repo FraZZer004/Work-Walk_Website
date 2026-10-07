@@ -271,6 +271,32 @@ button, [role='tab'] {
 }
 @keyframes fadeExit { to { opacity: 0; } }
 
+/* Phones: the text pinned under the 3D device swaps in place from one step to the next */
+.panel-step {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 180ms ease, transform 320ms var(--ease-out);
+}
+.panel-step.is-active {
+  opacity: 1;
+  transform: none;
+  transition-delay: 140ms;
+}
+/* ...and its copy in the scrolling flow is kept for screen readers only */
+@media screen and (max-width: 767.98px) {
+  .screen-sm-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
 /* Progress bars fill from the left when they scroll into view */
 .bar-fill {
   transform: scaleX(0);
@@ -459,6 +485,7 @@ dialog.menu[open] .menu-item {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { transform: none; transition: opacity 300ms ease; }
+  .panel-step { transform: none; }
   .word { transform: none; filter: none; animation: fadeOnly 400ms ease forwards; }
   .rise { transform: none; animation: fadeOnly 400ms ease forwards; }
   .page { animation: fadeOnly 300ms ease; }
