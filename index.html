@@ -3,29 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-    <title>Work&amp;Walk — Every Step at Work Counts</title>
-    <meta name="description" content="Work&Walk tracks your steps at work, logs your shifts, and calculates your net salary — all in one beautiful iPhone app." />
+    <title>Work&amp;Walk — Every step at work counts</title>
+    <meta name="description" content="Work&Walk brings your work schedule, your steps and your pay together in one iPhone app. Free on the App Store." />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Work&Walk — Every Step at Work Counts" />
-    <meta property="og:description" content="Track your steps, log your shifts, and calculate your net salary in real time. Available free on the App Store." />
-    <meta property="og:image" content="/screenshot-home.png" />
+    <meta property="og:url" content="https://workandwalk.eu/" />
+    <meta property="og:title" content="Work&Walk — Every step at work counts" />
+    <meta property="og:description" content="Your schedule, your steps and your pay in one iPhone app. Free on the App Store." />
+    <meta property="og:image" content="https://workandwalk.eu/app-icon.jpg" />
     <meta property="og:site_name" content="Work&Walk" />
+    <meta name="twitter:card" content="summary" />
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Work&Walk — Every Step at Work Counts" />
-    <meta name="twitter:description" content="Track your steps, log your shifts, calculate your salary. Free on the App Store." />
-    <meta name="twitter:image" content="/screenshot-home.png" />
-
-    <!-- Apple -->
+    <!-- Smart App Banner (Safari on iPhone) -->
+    <meta name="apple-itunes-app" content="app-id=6759506295" />
     <meta name="apple-mobile-web-app-title" content="Work&Walk" />
-    <meta name="theme-color" content="#0A0A0A" />
+    <meta name="theme-color" content="#0a0908" />
+    <meta name="color-scheme" content="dark" />
 
     <!-- SPA redirect decode for GitHub Pages (pairs with public/404.html) -->
     <script>
@@ -40,15 +37,25 @@
         }
       }(window.location));
     </script>
-
-    <!-- Fonts: Syne (display) + DM Sans (body) + DM Mono (numbers) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="/assets/index-Db86rnnp.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CnmxNUmK.css">
+    <style>
+      /* Loading screen: shown until the app has painted (removed by src/main.jsx) */
+      html { background: #0a0908; }
+      #boot { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; background: #0a0908; transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+      #boot.is-done { opacity: 0; pointer-events: none; }
+      #boot div { position: relative; width: 72px; height: 72px; }
+      #boot img { display: block; width: 72px; height: 72px; border-radius: 22%; }
+      #boot i { position: absolute; inset: -14px; border-radius: 50%; border: 2.5px solid rgba(255, 255, 255, 0.12); border-top-color: #ff9500; animation: boot 0.7s linear infinite; }
+      @keyframes boot { to { transform: rotate(360deg); } }
+      @media print { #boot { display: none; } }
+    </style>
+    <script type="module" crossorigin src="/assets/index-nbLpKcTT.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DzMdvE4T.css">
   </head>
   <body>
+    <div id="boot" role="status" aria-label="Loading">
+      <div><img src="/icon-192.jpg" alt="" width="72" height="72" /><i></i></div>
+    </div>
+    <noscript><p style="position:relative;z-index:300;padding:2rem;font-family:sans-serif;color:#f5f2ee">Work&amp;Walk needs JavaScript to display this page. You can find the app on the <a style="color:#ff9500" href="https://apps.apple.com/app/work-walk/id6759506295">App Store</a>.</p></noscript>
     <div id="root"></div>
   </body>
 </html>

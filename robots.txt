@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://workandwalk.app/sitemap.xml
+Sitemap: https://workandwalk.eu/sitemap.xml
