@@ -1,61 +1,32 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  // :hover only where a real pointer can hover (no sticky hover after a tap)
+  future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {
       fontFamily: {
-        display: ['Syne', 'sans-serif'],
-        sans: ['DM Sans', 'sans-serif'],
-        mono: ['DM Mono', 'monospace'],
+        // System font: on Apple devices this is SF Pro, the app's own typeface
+        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+        rounded: ['ui-rounded', '"SF Pro Rounded"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       colors: {
-        brand: {
-          orange: '#FF8000',
-          bright: '#FF9900',
-          gold: '#FFDD00',
-          dark: '#CC6600',
-          deep: '#994C00',
-          streak: '#FF7200',
-        },
-        card: {
-          DEFAULT: '#1C1C1E',
-          light: '#2C2C2E',
-        },
-        bg: '#0A0A0A',
-        trophy: {
-          health: '#FF9500',
-          session: '#FF6666',
-          time: '#FFBF00',
-          money: '#CC6600',
-          streak: '#FF7200',
-        },
-        metric: {
-          steps: '#FF9500',
-          'cal-start': '#FF3B30',
-          'cal-end': '#FF9500',
-          'dist-start': '#34C759',
-          'dist-end': '#00C7BE',
-          'hr-start': '#FF2D55',
-          'hr-end': '#AF52DE',
-          'floors-start': '#32ADE6',
-          'floors-end': '#007AFF',
-        },
+        // Same tokens as the app's dark theme (Theme.swift)
+        bg: '#0a0908',
+        surface: '#1d1c1a',
+        raised: '#272624',
+        hairline: 'rgba(255,255,255,0.10)',
+        ink: '#f5f2ee',
+        muted: 'rgba(245,242,238,0.62)',
+        faint: 'rgba(245,242,238,0.38)',
+        accent: '#ff9500',
       },
-      backgroundImage: {
-        'gradient-premium': 'linear-gradient(135deg, #FFDD00 0%, #FF9900 100%)',
-        'gradient-fire': 'linear-gradient(135deg, #FF8000 0%, #FF3B30 100%)',
-        'gradient-health': 'linear-gradient(135deg, #34C759 0%, #00C7BE 100%)',
-        'gradient-orange': 'linear-gradient(135deg, #FF8000 0%, #FF9900 100%)',
+      borderRadius: {
+        card: '22px',
       },
-      animation: {
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4,0,0.6,1) infinite',
-        float: 'float 6s ease-in-out infinite',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-12px)' },
-        },
+      transitionTimingFunction: {
+        out: 'cubic-bezier(0.23, 1, 0.32, 1)',
+        'in-out': 'cubic-bezier(0.77, 0, 0.175, 1)',
       },
     },
   },

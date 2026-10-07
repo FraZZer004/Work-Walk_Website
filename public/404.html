@@ -7,10 +7,10 @@
     When GitHub Pages returns 404 for a deep route (/privacy, /support),
     this page encodes the URL and redirects to index.html, where the
     inline script below decodes it back so React Router can handle it.
-    pathSegmentsToKeep = 1 keeps the repo name segment (/Work-Walk_Website).
+    The site is served from the domain root (workandwalk.eu), so no path segment is kept.
   -->
   <script>
-    var pathSegmentsToKeep = 1;
+    var pathSegmentsToKeep = 0;
     var l = window.location;
     l.replace(
       l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +

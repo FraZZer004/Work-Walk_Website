@@ -1,86 +1,53 @@
-# Work&Walk — Marketing Website
+# Work&Walk — Website
 
-Official marketing website for the **Work&Walk** iOS app. Built with Vite + React, Tailwind CSS, and Framer Motion.
+Marketing website for the **Work&Walk** iOS app, served at [workandwalk.eu](https://workandwalk.eu).
 
 ## Stack
 
-- **Framework**: Vite + React 19 (no Next.js required)
-- **Styling**: Tailwind CSS v3 + CSS custom properties
-- **Animations**: Framer Motion v12
-- **Routing**: React Router v7
-- **Icons**: Lucide React
-- **Fonts**: Syne (display) + DM Sans (body) + DM Mono (numbers)
+- Vite + React 19
+- Tailwind CSS v3 (design tokens mirror the app's dark theme)
+- React Router v7
+- Lucide icons
+- No animation library: CSS transitions and one `IntersectionObserver` hook
+
+## Languages
+
+French and English. The site follows the browser language (French for French browsers, English otherwise) and remembers the visitor's choice. All copy lives in `src/content/fr.js` and `src/content/en.js`.
 
 ## Pages
 
 | Route | Description |
 |---|---|
-| `/` | Landing page (Hero → Features → Showcases → Trophies → Premium → CTA) |
-| `/privacy` | Privacy Policy |
-| `/support` | FAQ + contact form |
+| `/` | Landing page (hero, app tour, details, watch and widget, goals, PRO, privacy) |
+| `/privacy` | Privacy policy (same text as in the app) |
+| `/support` | FAQ and contact |
 
-## Setup
+## Development
 
 ```bash
 npm install
-npm run dev
+npm run dev      # http://localhost:5173
+npm run build
+npm run lint
 ```
 
-Then open [http://localhost:5173](http://localhost:5173).
+## Deployment
 
-## Before going live
+Pushing to `main` builds the site and publishes it to GitHub Pages (`.github/workflows/deploy.yml`). `public/404.html` redirects deep links back to the single-page app.
 
-1. **App Store URL** — update `APP_STORE_URL` in `src/components/AppStoreBadge.jsx`
-2. **Domain** — update URLs in `public/sitemap.xml` and `public/robots.txt`
-3. **Contact email** — already set to `alan2004.krieger@gmail.com` in Footer and Support
+## Screenshots
 
-## Deploy to Vercel
+App screenshots are in `public/screens/` as WebP, one per screen and language (`home-fr.webp`, `home-en.webp`, …). They are taken from the iOS simulator with the app's guided-tour sample data.
 
-The `vercel.json` at the root configures SPA routing rewrites so that `/privacy` and `/support` work correctly on reload.
-
-```bash
-# One-click deploy
-npx vercel
-```
-
-Or connect the GitHub repo to Vercel — it auto-detects Vite and runs `npm run build`.
-
-## Assets
-
-All images are in `public/`:
-
-| File | Description |
-|---|---|
-| `app-icon.jpg` | App icon (rounded square) — used as favicon + OG image |
-| `app-logo.jpg` | Full logo asset |
-| `screenshot-home.png` | Dashboard tab screenshot |
-| `screenshot-analyse.png` | Analytics tab screenshot |
-| `screenshot-schedule.png` | Schedule tab screenshot |
-| `screenshot-salary.png` | Salary tab screenshot |
-| `screenshot-profile.png` | Profile/Health tab screenshot |
-
-## Project structure
+## Structure
 
 ```
 src/
-  components/
-    Navbar.jsx          Sticky navbar with blur + mobile menu
-    DeviceFrame.jsx     CSS iPhone 16 Pro mockup
-    AnimatedCounter.jsx Scroll-triggered number animation
-    AppStoreBadge.jsx   App Store download button
-  sections/
-    Hero.jsx            Full-screen hero with device frame
-    Features.jsx        3-column glass card highlights
-    ShowcaseSection.jsx Reusable alternating showcase layout
-    Trophies.jsx        Achievement grid (5 categories)
-    Premium.jsx         Premium features card with crown
-    FinalCTA.jsx        Final App Store call to action
-    Footer.jsx          Footer with links
-  pages/
-    Home.jsx            Assembles all sections
-    Privacy.jsx         Privacy policy
-    Support.jsx         FAQ + contact
-  App.jsx               React Router routes
-  main.jsx              BrowserRouter entry
-  index.css             Global styles, design tokens, grain overlay
+  content/         fr.js, en.js — all copy
+  components/      Nav, AppStoreButton, Phone, Reveal
+  hooks/           useInView
+  sections/        Hero, Tour, Details, Devices, Goals, Pro, PrivacyStrip, FinalCTA, Footer
+  pages/           Home, Privacy, Support
+  LangProvider.jsx language detection and persistence
+  i18n.js          useLang hook
 ```

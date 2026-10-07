@@ -1,3 +1,4 @@
+/* global process */
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -6,4 +7,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: process.env.VITE_BASE_PATH ?? '/',
+  // Shown in the footer as the date the site was last updated.
+  define: { __BUILD_DATE__: JSON.stringify(new Date().toISOString()) },
 })

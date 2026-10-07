@@ -1,52 +1,64 @@
+/* global __BUILD_DATE__ */
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { asset } from '../utils/asset'
+import ConfirmDialog from '../components/ConfirmDialog'
+import { SUPPORT_EMAIL } from '../components/FloatingActions'
+import { useConsent } from '../consent'
+import { useLang } from '../i18n'
 
 export default function Footer() {
-  const year = new Date().getFullYear()
+  const { t, lang, resetLang } = useLang()
+  const consent = useConsent()
+  const [confirming, setConfirming] = useState(false)
+  const [cleared, setCleared] = useState(false)
+
+  const updated = new Intl.DateTimeFormat(lang === 'fr' ? 'fr-FR' : 'en-GB', { dateStyle: 'long' }).format(new Date(__BUILD_DATE__))
+  const link = 'text-left transition-colors duration-150 hover:text-ink'
+
+  const clearPreferences = () => {
+    setConfirming(false)
+    resetLang()
+    consent.reset()
+    setCleared(true)
+  }
 
   return (
-    <footer
-      className="py-12 border-t"
-      style={{ borderColor: 'rgba(255,255,255,0.05)', background: '#080808' }}
-    >
-      <div className="page-container flex flex-col sm:flex-row items-center justify-between gap-6">
-        {/* Logo + tagline */}
-        <div className="flex flex-col items-center sm:items-start gap-1">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={asset('/app-icon.jpg')} alt="Work&Walk" className="w-6 h-6 rounded-lg object-cover" />
-            <span className="font-display font-bold text-sm">
-              Work<span className="text-gradient-orange">&</span>Walk
-            </span>
+    <footer className="border-t border-hairline pb-[env(safe-area-inset-bottom)]">
+      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-12 md:flex-row md:items-start md:justify-between">
+        <div>
+          <Link to="/" className="flex items-center gap-2.5 font-semibold tracking-tight">
+            <img src="/icon-192.jpg" alt="" width="30" height="30" loading="lazy" className="h-[1.875rem] w-[1.875rem] rounded-[8px]" />
+            <span>Work&amp;Walk</span>
           </Link>
-          <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
-            Every step at work counts.
-          </p>
+          <p className="mt-3 text-sm text-muted">{t.footer.tagline}</p>
         </div>
 
-        {/* Links */}
-        <div className="flex items-center gap-6 text-xs" style={{ color: 'var(--text-tertiary)' }}>
-          <Link to="/privacy" className="hover:text-white transition-colors duration-200">
-            Privacy Policy
-          </Link>
-          <a href="/privacy#terms" className="hover:text-white transition-colors duration-200">
-            Terms of Use
-          </a>
-          <Link to="/support" className="hover:text-white transition-colors duration-200">
-            Support
-          </Link>
-          <a
-            href="mailto:workandwalkapp@gmail.com"
-            className="hover:text-white transition-colors duration-200"
-          >
-            Contact
-          </a>
-        </div>
-
-        {/* Copyright */}
-        <p className="text-xs order-last sm:order-none" style={{ color: 'var(--text-tertiary)' }}>
-          © {year} Work&Walk
-        </p>
+        <nav aria-label={t.footer.nav} className="no-print grid grid-cols-2 gap-x-10 gap-y-2.5 text-sm text-muted sm:grid-cols-3">
+          <Link to="/privacy" className={link}>{t.footer.privacy}</Link>
+          <Link to="/support" className={link}>{t.footer.support}</Link>
+          <a href={`mailto:${SUPPORT_EMAIL}`} className={link}>{t.footer.contact}</a>
+          <button type="button" onClick={consent.reopen} className={link}>{t.footer.cookies}</button>
+          <button type="button" onClick={() => window.print()} className={link}>{t.footer.print}</button>
+          <button type="button" onClick={() => { setCleared(false); setConfirming(true) }} className={link}>{t.footer.reset}</button>
+        </nav>
       </div>
+
+      <div className="mx-auto max-w-6xl px-5 pb-10 text-xs text-faint">
+        <p role="status" className="mb-2 text-muted">{cleared ? t.footer.resetDone : ''}</p>
+        <p>© {new Date().getFullYear()} Work&amp;Walk. {t.footer.rights}</p>
+        <p className="mt-1">{t.footer.apple}</p>
+        <p className="mt-1">{t.footer.updated} <time dateTime={__BUILD_DATE__}>{updated}</time>.</p>
+      </div>
+
+      <ConfirmDialog
+        open={confirming}
+        title={t.confirm.resetTitle}
+        text={t.confirm.resetText}
+        confirmLabel={t.confirm.resetOk}
+        cancelLabel={t.confirm.cancel}
+        onConfirm={clearPreferences}
+        onCancel={() => setConfirming(false)}
+      />
     </footer>
   )
 }
