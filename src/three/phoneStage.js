@@ -25,7 +25,7 @@ function restingPoses(count, { width, height, heroBottom, textTop, reduced }) {
         rx: 0.07, ry: (right ? -0.36 : 0.36) + (i > 0 && !reduced ? TURN : 0), rz: right ? 0.03 : -0.03,
       })
     }
-    if (!reduced) Object.assign(poses[0], { ry: -0.52, rz: 0.06, scale: scale * 1.05 })
+    if (!reduced && poses.length) Object.assign(poses[0], { ry: -0.52, rz: 0.06, scale: scale * 1.05 })
     return poses
   }
 
@@ -48,9 +48,10 @@ function restingPoses(count, { width, height, heroBottom, textTop, reduced }) {
 /**
  * The phone that follows the page: it rests beside each step, turns as the visitor
  * scrolls from one to the next, and swaps its screen on the way.
+ * It never reads the page itself (it may run in a worker): src/three/host.js gives it its size and the pointer.
  */
-export function mountPhoneStage(canvas, { reduced = false, onReady } = {}) {
-  const studio = createStudio(canvas)
+export function mountPhoneStage(canvas, { reduced = false, pixelRatio = 1, onReady } = {}) {
+  const studio = createStudio(canvas, { pixelRatio })
   const { renderer, scene, camera } = studio
   camera.position.z = VISIBLE_HEIGHT / 2 / Math.tan((camera.fov * Math.PI) / 360)
 
@@ -59,6 +60,8 @@ export function mountPhoneStage(canvas, { reduced = false, onReady } = {}) {
   const dust = buildDust()
   glow.position.z = -0.9
   scene.add(phone.object, glow, dust)
+  // Shaders compile in the background (KHR_parallel_shader_compile) instead of freezing the first frame.
+  const compiled = renderer.compileAsync(scene, camera).catch(() => {})
 
   let stepScreens = []     // for each step, the index of its texture
   let textures = []
@@ -77,9 +80,9 @@ export function mountPhoneStage(canvas, { reduced = false, onReady } = {}) {
   const pointer = { x: 0, y: 0 }
   const tilt = { x: 0, y: 0, vx: 0, vy: 0 }
 
+  let size = { width: 0, height: 0 } // CSS pixels of the canvas
   const resize = () => {
-    const width = canvas.clientWidth
-    const height = canvas.clientHeight
+    const { width, height } = size
     if (!width || !height) return
     renderer.setSize(width, height, false)
     camera.aspect = width / height
@@ -150,17 +153,10 @@ export function mountPhoneStage(canvas, { reduced = false, onReady } = {}) {
 
   const start = () => { if (!frame && visible) { last = performance.now(); frame = requestAnimationFrame(render) } }
 
-  const onPointerMove = (event) => {
-    if (event.pointerType !== 'mouse') return
-    pointer.x = (event.clientX / window.innerWidth) * 2 - 1
-    pointer.y = (event.clientY / window.innerHeight) * 2 - 1
-  }
-  if (!reduced) window.addEventListener('pointermove', onPointerMove, { passive: true })
-
-  const observer = new ResizeObserver(resize)
-  observer.observe(canvas)
-
   return {
+    setSize(width, height) { size = { width, height }; resize() },
+    /** Mouse position over the window, from -1 to 1 on both axes. */
+    setPointer(x, y) { pointer.x = x; pointer.y = y },
     /** `urls`: one texture per screen; `screens`: for each step, which of them it shows. */
     setScreens(urls, screens) {
       stepScreens = screens
@@ -172,7 +168,7 @@ export function mountPhoneStage(canvas, { reduced = false, onReady } = {}) {
           if (current !== request) { texture.dispose(); return }
           textures[i]?.dispose()
           textures[i] = texture
-          if (i === 0 && !ready) { ready = 'pending'; introStart = performance.now(); start() }
+          if (i === 0 && !ready) compiled.then(() => { if (current === request && !ready) { ready = 'pending'; introStart = performance.now(); start() } })
         }).catch(() => {})
       })
     },
@@ -183,8 +179,6 @@ export function mountPhoneStage(canvas, { reduced = false, onReady } = {}) {
       visible = false
       request++
       cancelAnimationFrame(frame)
-      observer.disconnect()
-      window.removeEventListener('pointermove', onPointerMove)
       textures.forEach((texture) => texture?.dispose())
       disposeStudio(studio)
     },

@@ -4,7 +4,7 @@ export const en = {
     description: 'Work&Walk brings your work schedule, your steps and your pay together in one iPhone app. Free on the App Store.',
   },
   nav: { features: 'Features', devices: 'Watch & widget', pro: 'PRO', support: 'Support', download: 'Download' },
-  store: { small: 'Download on the', big: 'App Store', aria: 'Download Work&Walk on the App Store' },
+  store: { small: 'Download on the', big: 'App Store', aria: 'Download on the App Store: Work&Walk' },
   hero: {
     title: ['Every step at work', 'counts.'],
     more: 'Discover the app',

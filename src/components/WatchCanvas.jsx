@@ -20,11 +20,14 @@ export default function WatchCanvas({ alt }) {
       view?.setVisible(visible)
       if (!visible || requested) return
       requested = true
-      import('../three/watchView.js').then(({ mountWatch }) => {
-        if (disposed) return
-        view = mountWatch(canvas, { reduced: prefersReducedMotion(), url: SCREEN, onReady: () => setStatus('ready') })
+      const off = () => { if (!disposed) setStatus('off') }
+      import('../three/host.js').then(({ mountStage }) => mountStage('watch', canvas, {
+        reduced: prefersReducedMotion(), url: SCREEN, onReady: () => setStatus('ready'), onError: off,
+      })).then((stage) => {
+        if (disposed) { stage.dispose(); return }
+        view = stage
         view.setVisible(visible)
-      }).catch(() => { if (!disposed) setStatus('off') })
+      }).catch(off)
     }, { rootMargin: '300px' })
     observer.observe(canvas)
 

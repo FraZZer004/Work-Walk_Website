@@ -18,7 +18,7 @@ export default {
         hairline: 'rgba(255,255,255,0.10)',
         ink: '#f5f2ee',
         muted: 'rgba(245,242,238,0.62)',
-        faint: 'rgba(245,242,238,0.38)',
+        faint: 'rgba(245,242,238,0.56)', // 5.9:1 on the page background (WCAG AA)
         accent: '#ff9500',
       },
       borderRadius: {

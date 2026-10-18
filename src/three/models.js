@@ -2,11 +2,21 @@ import {
   ACESFilmicToneMapping, AdditiveBlending, BackSide, BoxGeometry, BufferGeometry, CanvasTexture, CapsuleGeometry, Color,
   CylinderGeometry, DataTexture, DoubleSide, Float32BufferAttribute, Group, LinearFilter, LinearMipmapLinearFilter, Mesh,
   MeshBasicMaterial, MeshPhysicalMaterial, MeshStandardMaterial, PerspectiveCamera, PlaneGeometry, PMREMGenerator, Points,
-  PointsMaterial, Scene, ShaderMaterial, Shape, ShapeGeometry, Sprite, SpriteMaterial, SRGBColorSpace, TextureLoader,
+  PointsMaterial, Scene, ShaderMaterial, Shape, ShapeGeometry, Sprite, SpriteMaterial, SRGBColorSpace, Texture, TextureLoader,
   WebGLRenderer,
 } from 'three'
 
 /* ---------- Studio: renderer, camera and a softbox environment for the reflections ---------- */
+
+// These modules run on the page or in a worker (src/three/stageWorker.js), where there is no DOM.
+const inWorker = typeof document === 'undefined'
+const makeCanvas = (width, height) => {
+  if (inWorker) return new OffscreenCanvas(width, height)
+  const canvas = document.createElement('canvas')
+  canvas.width = width
+  canvas.height = height
+  return canvas
+}
 
 function buildEnvironment() {
   const scene = new Scene()
@@ -29,9 +39,26 @@ function buildEnvironment() {
   return scene
 }
 
-export function createStudio(canvas, { fov = 24 } = {}) {
-  const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' })
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
+/**
+ * Whether WebGL runs on a real GPU. A software renderer (SwiftShader, llvmpipe…) would freeze the page for seconds, so
+ * the 3D is skipped there. Probed once on a 1 × 1 canvas without antialiasing, which is cheap even in software.
+ */
+let hardware
+export function hasHardwareWebGL() {
+  if (hardware !== undefined) return hardware
+  const gl = makeCanvas(1, 1).getContext('webgl2', { antialias: false, depth: false, failIfMajorPerformanceCaveat: true })
+  if (!gl) return (hardware = false)
+  const info = gl.getExtension('WEBGL_debug_renderer_info')
+  const name = String(gl.getParameter(info ? info.UNMASKED_RENDERER_WEBGL : gl.RENDERER))
+  gl.getExtension('WEBGL_lose_context')?.loseContext()
+  return (hardware = !/swiftshader|llvmpipe|softpipe|software|basic render/i.test(name))
+}
+
+export function createStudio(canvas, { fov = 24, pixelRatio = 1 } = {}) {
+  // On the page (no worker available), a software renderer would freeze it: the callers fall back to the screenshots.
+  if (!inWorker && !hasHardwareWebGL()) throw new Error('No hardware WebGL')
+  const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance', failIfMajorPerformanceCaveat: !inWorker })
+  renderer.setPixelRatio(Math.min(pixelRatio, 2))
   renderer.outputColorSpace = SRGBColorSpace
   renderer.toneMapping = ACESFilmicToneMapping
   renderer.setClearColor(0x000000, 0)
@@ -195,14 +222,22 @@ function glassMaterial() {
 }
 
 export function loadTexture(url, renderer) {
+  const settle = (texture) => {
+    texture.colorSpace = SRGBColorSpace
+    texture.anisotropy = renderer.capabilities.getMaxAnisotropy()
+    texture.minFilter = LinearMipmapLinearFilter
+    texture.magFilter = LinearFilter
+    return texture
+  }
+  // In a worker there is no <img>: the image is decoded to a bitmap, already turned the way WebGL expects it.
+  if (inWorker) {
+    return fetch(url)
+      .then((response) => { if (!response.ok) throw new Error(`${response.status} ${url}`); return response.blob() })
+      .then((blob) => createImageBitmap(blob, { imageOrientation: 'flipY' }))
+      .then((bitmap) => { const texture = new Texture(bitmap); texture.flipY = false; texture.needsUpdate = true; return settle(texture) })
+  }
   return new Promise((resolve, reject) => {
-    new TextureLoader().load(url, (texture) => {
-      texture.colorSpace = SRGBColorSpace
-      texture.anisotropy = renderer.capabilities.getMaxAnisotropy()
-      texture.minFilter = LinearMipmapLinearFilter
-      texture.magFilter = LinearFilter
-      resolve(texture)
-    }, undefined, reject)
+    new TextureLoader().load(url, (texture) => resolve(settle(texture)), undefined, reject)
   })
 }
 
@@ -379,8 +414,7 @@ export function buildWatch() {
 
 function radialTexture(stops) {
   const size = 256
-  const canvas = document.createElement('canvas')
-  canvas.width = canvas.height = size
+  const canvas = makeCanvas(size, size)
   const context = canvas.getContext('2d')
   const gradient = context.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2)
   stops.forEach(([offset, color]) => gradient.addColorStop(offset, color))

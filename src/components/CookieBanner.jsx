@@ -23,7 +23,7 @@ export default function CookieBanner() {
         <button type="button" onClick={() => decide('denied')} className="pressable h-11 rounded-2xl bg-white/[0.09] font-semibold hover:bg-white/[0.15]">
           {t.cookies.decline}
         </button>
-        <button type="button" onClick={() => decide('granted')} className="pressable h-11 rounded-2xl bg-accent font-semibold text-white hover:bg-[#ffa21f]">
+        <button type="button" onClick={() => decide('granted')} className="pressable h-11 rounded-2xl bg-accent font-semibold text-bg hover:bg-[#ffa21f]">
           {t.cookies.accept}
         </button>
       </div>

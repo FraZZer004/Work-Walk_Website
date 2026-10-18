@@ -77,15 +77,24 @@ export default function Showcase() {
     const layout = new ResizeObserver(() => { measure(); follow() })
     layout.observe(wrap)
 
-    import('../three/phoneStage.js').then(({ mountPhoneStage }) => {
-      if (disposed) return
-      const stage = mountPhoneStage(canvasRef.current, { reduced: prefersReducedMotion(), onReady: () => setStatus('ready') })
+    // The 3D phone is built once the page has loaded and the browser is idle, so it never delays the first screen;
+    // the placeholder holds its place until then.
+    const whenIdle = () => new Promise((resolve) => {
+      const idle = () => (window.requestIdleCallback ? requestIdleCallback(resolve, { timeout: 1500 }) : setTimeout(resolve, 200))
+      if (document.readyState === 'complete') idle()
+      else window.addEventListener('load', idle, { once: true })
+    })
+    const off = () => { if (!disposed) setStatus('off') }
+    whenIdle().then(() => import('../three/host.js')).then(({ mountStage }) => mountStage('phone', canvasRef.current, {
+      reduced: prefersReducedMotion(), onReady: () => setStatus('ready'), onError: off,
+    })).then((stage) => {
+      if (disposed) { stage.dispose(); return }
       stageRef.current = stage
       stage.setScreens(SCREENS.map((id) => screenUrl(id, langRef.current)), STEP_SCREENS)
       measure()
       follow()
       stage.setVisible(visible)
-    }).catch(() => { if (!disposed) setStatus('off') })
+    }).catch(off)
 
     return () => {
       disposed = true

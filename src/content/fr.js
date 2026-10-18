@@ -4,7 +4,7 @@ export const fr = {
     description: 'Work&Walk réunit ton planning, tes pas et ton salaire dans une seule app iPhone. Gratuit sur l’App Store.',
   },
   nav: { features: 'Fonctionnalités', devices: 'Montre et widget', pro: 'PRO', support: 'Aide', download: 'Télécharger' },
-  store: { small: 'Télécharger dans', big: 'l’App Store', aria: 'Télécharger Work&Walk dans l’App Store' },
+  store: { small: 'Télécharger dans', big: 'l’App Store', aria: 'Télécharger dans l’App Store : Work&Walk' },
   hero: {
     title: ['Chaque pas au travail', 'compte.'],
     more: 'Découvrir l’app',
