@@ -487,6 +487,31 @@ dialog.menu[open] .menu-item {
   8%, 86% { opacity: 1; transform: none; }
   94%, 100% { opacity: 0; transform: translateY(-6px); }
 }
+/* The guided tour moves from one screen to the next (Details.jsx) */
+.tour-step {
+  animation: tourStep 6s var(--ease-in-out) infinite;
+}
+@keyframes tourStep {
+  0%, 16% { transform: translateX(0); }
+  20%, 36% { transform: translateX(16px); }
+  40%, 56% { transform: translateX(32px); }
+  60%, 76% { transform: translateX(48px); }
+  80%, 96% { transform: translateX(64px); }
+  100% { transform: translateX(0); }
+}
+
+/* The receipt of the day feeds out of its slot (Details.jsx); the zigzag is its torn edge */
+.receipt-paper {
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 12px 100%;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 12px 100%;
+}
+.js .receipt-feed {
+  transform: translateY(-101%);
+  transition: transform 1700ms cubic-bezier(0.22, 1, 0.36, 1) 450ms;
+}
+.js .is-in .receipt-feed {
+  transform: none;
+}
 .ring-pulse {
   animation: ringPulse 3.2s var(--ease-out) infinite;
   animation-delay: var(--d, 0ms);
@@ -518,8 +543,10 @@ dialog.menu[open] .menu-item {
   .bar-fill { transition: none; transform: scaleX(var(--v, 0)); }
   .btn:active, .pressable:active, .btn:hover, .btn:hover:active { transform: none; }
   .sheen::after, .scan-beam, .scroll-cue, .ring-pulse { display: none; animation: none; }
+  .tour-step { animation: none; }
   .backdrop i, .orbit, .shimmer::after { animation: none; }
   .scan-row, .notif { animation: none; opacity: 1; }
+  .js .receipt-feed { transform: none; transition: none; }
   .pop, .pop[data-hidden='true'], dialog.sheet, dialog.menu, .qr-pop { transform: none !important; }
   dialog.menu[open] .menu-item { animation: none; }
   .acc-panel, .acc-panel[data-open='true'] { transition: none; }
@@ -556,7 +583,7 @@ dialog.menu[open] .menu-item {
     animation: none !important;
     transition: none !important;
   }
-  .reveal, .word, .rise, .scan-row, .notif { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .reveal, .word, .rise, .scan-row, .notif, .receipt-feed { opacity: 1 !important; transform: none !important; filter: none !important; }
   .card, .glass { border: 1px solid #bbb !important; break-inside: avoid; }
   .eyebrow { color: #a35200 !important; }
   .acc-panel { grid-template-rows: 1fr !important; visibility: visible !important; }

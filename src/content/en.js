@@ -51,15 +51,31 @@ export const en = {
   },
   details: {
     eyebrow: 'In detail',
-    title: 'The small things that save time.',
+    title: 'The small things that make the difference.',
     items: [
       { icon: 'wand', title: 'AI import', text: 'Take a photo of your schedule or pick a PDF: the app turns it into sessions.', pro: true },
       { icon: 'bell', title: 'Notifications worth having', text: 'A reminder before your shift, a note at the end of the day, your recap every week. Each type has its own switch.' },
       { icon: 'calendar', title: 'Automatic public holidays', text: 'French public holidays appear in your schedule, for every year, with nothing to enter.' },
       { icon: 'lock', title: 'Salary behind Face ID', text: 'Lock the Salary tab: it only opens with your face or your passcode.' },
+      { icon: 'footprints', title: 'Your shifts in Health', text: 'Turn on one option, and every finished session is saved to Apple Health as a walking workout.' },
       { icon: 'globe', title: 'French and English', text: 'Choose the app’s language and your currency, independently of the phone’s settings.' },
       { icon: 'map', title: 'A guided tour', text: 'On first launch, the app shows you every screen with sample data, then starts from scratch.' },
     ],
+    visuals: { salary: 'Estimated pay', amount: '€1,863.52', walk: 'Walking', walkDetail: '8 hr · 9,214 steps' },
+    receipt: {
+      title: 'Your receipt of the day',
+      text: 'Your hours, estimated pay, steps and calories on a till receipt, ready to share as a story.',
+      alt: 'The Work&Walk receipt of the day: 8 hours of work, €95 of estimated pay, 9,214 steps and 312 kcal',
+      ui: {
+        official: 'OFFICIAL RECEIPT',
+        date: 'Oct 14, 2026',
+        rows: [['WORKING HOURS', '8h00'], ['EST. SALARY', '€95.00'], ['STEPS TAKEN', '9,214'], ['CALORIES', '312 kcal']],
+        total: 'TOTAL WIN',
+        double: 'DOUBLE!',
+        why: '(Money + Health)',
+        thanks: 'Thank you for your visit',
+      },
+    },
     theme: { title: 'Light or dark', text: 'The app follows the phone’s theme, or the one you prefer.', alt: 'The home screen in the light theme, compared with the dark theme', dark: 'Dark', light: 'Light', slider: 'Compare the light and dark themes' },
   },
   devices: {

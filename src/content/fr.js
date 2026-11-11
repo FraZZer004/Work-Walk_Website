@@ -51,15 +51,31 @@ export const fr = {
   },
   details: {
     eyebrow: 'Dans le détail',
-    title: 'Les petites choses qui font gagner du temps.',
+    title: 'Les petites choses qui font la différence.',
     items: [
       { icon: 'wand', title: 'Import par IA', text: 'Prends ton planning en photo ou choisis un PDF : l’app en tire toutes tes sessions.', pro: true },
       { icon: 'bell', title: 'Des notifications utiles', text: 'Un rappel avant ton poste, un mot en fin de journée, ton récap chaque semaine. Chaque type se règle séparément.' },
       { icon: 'calendar', title: 'Jours fériés automatiques', text: 'Les jours fériés français apparaissent dans ton planning, pour toutes les années, sans rien saisir.' },
       { icon: 'lock', title: 'Salaire sous Face ID', text: 'Verrouille l’onglet Salaire : il ne s’ouvre qu’avec ton visage ou ton code.' },
+      { icon: 'footprints', title: 'Tes postes dans Santé', text: 'Active une option, et chaque session terminée s’enregistre dans Apple Santé comme une séance de marche.' },
       { icon: 'globe', title: 'Français et anglais', text: 'Choisis la langue de l’app et ta devise, indépendamment des réglages du téléphone.' },
       { icon: 'map', title: 'Une visite guidée', text: 'Au premier lancement, l’app te montre chaque écran avec des données d’exemple, puis repart de zéro.' },
     ],
+    visuals: { salary: 'Salaire estimé', amount: '1\u202f863,52 €', walk: 'Marche', walkDetail: '8 h · 9\u202f214 pas' },
+    receipt: {
+      title: 'Ton reçu du jour',
+      text: 'Tes heures, ton salaire estimé, tes pas et tes calories sur un ticket de caisse, prêt à partager en story.',
+      alt: 'Le reçu du jour de Work&Walk : 8 h de travail, 95 € de salaire estimé, 9 214 pas et 312 kcal',
+      ui: {
+        official: 'REÇU OFFICIEL',
+        date: '14 oct. 2026',
+        rows: [['TEMPS TRAVAIL', '8h00'], ['SALAIRE EST.', '95,00 €'], ['PAS EFFECTUÉS', '9\u202f214'], ['CALORIES', '312 kcal']],
+        total: 'TOTAL GAIN',
+        double: 'DOUBLE !',
+        why: '(Argent + Santé)',
+        thanks: 'Merci de ta visite',
+      },
+    },
     theme: { title: 'Clair ou sombre', text: 'L’app suit le thème du téléphone, ou celui que tu préfères.', alt: 'L’écran d’accueil en thème clair, comparé au thème sombre', dark: 'Sombre', light: 'Clair', slider: 'Comparer le thème clair et le thème sombre' },
   },
   devices: {
