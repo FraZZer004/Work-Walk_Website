@@ -41,7 +41,7 @@ npm run lint
 
 1. `vite build`: the browser bundle in `dist/`.
 2. `vite build --ssr src/entry-server.jsx`: the same app for Node, in `dist-ssr/`.
-3. `scripts/prerender.js`: renders each page in each language into `dist/` (`index.html`, `privacy.html`, `support.html`, `en/…`), plus `404.html` and `sitemap.xml`, then deletes `dist-ssr/`. Titles, descriptions, `hreflang`, link previews and schema.org data come from `src/seo.js`.
+3. `scripts/prerender.js`: renders each page in each language into `dist/` (`index.html`, `privacy.html`, `support.html`, `en/…`), plus `404.html` and `sitemap.xml`, then deletes `dist-ssr/`. The stylesheet (about 8 kB compressed) is written into each page, so the first paint needs no other file. Titles, descriptions, `hreflang`, link previews and schema.org data come from `src/seo.js`.
 
 Code that runs while rendering must give the same result on the server and in the browser: anything that depends on the browser (window size, storage, language, the campaign) is read in effects or through `useSyncExternalStore` with a server value.
 

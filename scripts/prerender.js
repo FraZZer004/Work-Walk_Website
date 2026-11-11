@@ -16,7 +16,12 @@ const dist = join(root, 'dist')
 const serverBuild = join(root, 'dist-ssr')
 
 const { render, headTags, LANGS, PAGES, SITE_URL, pathOf } = await import(pathToFileURL(join(serverBuild, 'entry-server.js')).href)
-const template = await readFile(join(dist, 'index.html'), 'utf8')
+// The stylesheet is small: written into each page, the page can show without waiting for a second request.
+const built = await readFile(join(dist, 'index.html'), 'utf8')
+const stylesheet = built.match(/<link rel="stylesheet"[^>]*href="\/(assets\/[^"]+\.css)"[^>]*>/)
+if (!stylesheet) throw new Error('The stylesheet of index.html was not found.')
+const css = await readFile(join(dist, stylesheet[1]), 'utf8')
+const template = built.replace(stylesheet[0], () => `<style>${css}</style>`)
 
 const fileOf = (path) => (path.endsWith('/') ? `${path}index.html` : `${path}.html`).slice(1)
 

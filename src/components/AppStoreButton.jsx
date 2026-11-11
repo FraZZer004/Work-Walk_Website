@@ -78,7 +78,7 @@ function FullButton({ href, t, className }) {
       <span className="sheen" aria-hidden="true" />
       <AppleLogo className="h-7 w-7" />
       <span className="flex flex-col text-left leading-none">
-        <span className="text-[0.6875rem] font-medium opacity-70">{t.store.small}</span>
+        <span className="text-[0.6875rem] font-medium opacity-70">{t.store.small}</span>{' '}
         <span className="mt-1 text-xl font-semibold tracking-tight">{t.store.big}</span>
       </span>
     </a>
