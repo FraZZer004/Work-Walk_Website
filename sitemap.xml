@@ -1,18 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://workandwalk.eu/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://workandwalk.eu/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://workandwalk.eu/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://workandwalk.eu/" />
+  </url>
+  <url>
+    <loc>https://workandwalk.eu/en/</loc>
+    <lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://workandwalk.eu/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://workandwalk.eu/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://workandwalk.eu/" />
   </url>
   <url>
     <loc>https://workandwalk.eu/privacy</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
+    <lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://workandwalk.eu/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://workandwalk.eu/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://workandwalk.eu/privacy" />
+  </url>
+  <url>
+    <loc>https://workandwalk.eu/en/privacy</loc>
+    <lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://workandwalk.eu/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://workandwalk.eu/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://workandwalk.eu/privacy" />
   </url>
   <url>
     <loc>https://workandwalk.eu/support</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://workandwalk.eu/support" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://workandwalk.eu/en/support" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://workandwalk.eu/support" />
+  </url>
+  <url>
+    <loc>https://workandwalk.eu/en/support</loc>
+    <lastmod>2026-11-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://workandwalk.eu/support" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://workandwalk.eu/en/support" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://workandwalk.eu/support" />
   </url>
 </urlset>
