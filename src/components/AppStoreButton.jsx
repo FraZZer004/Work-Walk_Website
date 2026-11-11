@@ -1,3 +1,4 @@
+import StoreQr from './StoreQr'
 import { useCampaign } from '../hooks/useCampaign'
 import { useLang } from '../i18n'
 import { storeUrl } from '../utils/tracking'
@@ -11,27 +12,61 @@ function AppleLogo({ className }) {
 }
 
 /**
+ * On a computer, the iPhone app can't be installed from the page: hovering the button shows the App Store link
+ * as a QR code to scan with the phone. Only where a mouse can hover (index.css, .qr-pop).
+ */
+const POSITIONS = {
+  center: 'top-full mt-3 left-1/2 -ml-[5.5rem] origin-top',
+  right: 'top-full mt-3 right-0 origin-top-right',
+  up: 'bottom-full mb-3 left-1/2 -ml-[5.5rem] origin-bottom',
+}
+
+function QrPopover({ position }) {
+  const { t } = useLang()
+  return (
+    <span
+      aria-hidden="true"
+      className={`qr-pop no-print pointer-events-none absolute z-10 w-44 flex-col items-center rounded-[22px] border border-white/10 bg-[#171614] p-3 text-center shadow-[0_24px_60px_-20px_rgba(0,0,0,0.9)] ${POSITIONS[position]}`}
+    >
+      <span className="block rounded-[14px] bg-white p-2.5"><StoreQr className="block h-32 w-32 text-black" /></span>
+      <span className="mt-2.5 block text-[0.8125rem] leading-snug text-muted">{t.store.qr}</span>
+    </span>
+  )
+}
+
+/**
  * The main call to action. `placement` says where on the site the button sits, so that
  * downloads can be traced back to it. `compact` is the short version of the navigation bar.
+ * `qr` adds the QR code shown on hover: 'center' or 'right' below the button, 'up' above it.
  */
-export default function AppStoreButton({ placement, compact = false, className = '' }) {
+export default function AppStoreButton({ placement, compact = false, qr = null, className = '' }) {
   const { t } = useLang()
   const href = storeUrl(placement, useCampaign())
+  const button = compact ? <CompactButton href={href} label={t.nav.download} className={className} /> : <FullButton href={href} t={t} className={className} />
+  if (!qr) return button
+  return (
+    <span className="qr-anchor relative inline-flex">
+      {button}
+      <QrPopover position={qr} />
+    </span>
+  )
+}
 
-  if (compact) {
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`btn inline-flex h-10 items-center rounded-full bg-accent px-4 text-sm font-semibold text-white ${className}`}
-      >
-        <span className="sheen" aria-hidden="true" />
-        {t.nav.download}
-      </a>
-    )
-  }
+function CompactButton({ href, label, className }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`btn inline-flex h-10 items-center rounded-full bg-accent px-4 text-sm font-semibold text-white ${className}`}
+    >
+      <span className="sheen" aria-hidden="true" />
+      {label}
+    </a>
+  )
+}
 
+function FullButton({ href, t, className }) {
   return (
     <a
       href={href}

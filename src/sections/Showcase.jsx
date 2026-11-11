@@ -190,7 +190,7 @@ export default function Showcase() {
           ref={(el) => { stepRefs.current[0] = el }}
           className="print-flow relative mx-auto flex min-h-[100svh] max-w-6xl items-start px-5 pt-[calc(6.5rem+env(safe-area-inset-top))] md:items-center md:pt-16"
         >
-          <div ref={heroTextRef} className="fade-exit pointer-events-auto md:w-[54%]">
+          <div ref={heroTextRef} className="fade-exit pointer-events-auto relative z-10 md:w-[54%]">
             <h1 className="display text-[clamp(2.7rem,7.6vw,5.6rem)]">
               {titleWords.map((word, index) => (
                 <span key={word + index}><span className="word" style={{ '--i': index }}>{word}</span>{' '}</span>
@@ -198,16 +198,17 @@ export default function Showcase() {
               <span className="word text-flame pb-[0.14em]" style={{ '--i': titleWords.length }}>{t.hero.title[1]}</span>
             </h1>
             <p className="lede rise mt-5 max-w-xl text-[1.0625rem] md:mt-7 md:text-xl" style={{ '--d': '480ms' }}>{t.hero.lede}</p>
-            <div className="rise mt-7 flex flex-wrap items-center gap-x-7 gap-y-4 md:mt-9" style={{ '--d': '580ms' }}>
-              <AppStoreButton placement="hero" />
+            <div className="rise relative z-10 mt-7 flex flex-wrap items-center gap-x-7 gap-y-4 md:mt-9" style={{ '--d': '580ms' }}>
+              <AppStoreButton placement="hero" qr="center" />
               <a href="#features" className="group hidden items-center gap-2 font-semibold sm:inline-flex">
                 {t.hero.more}
                 <ArrowDown className="h-4 w-4 text-accent transition-transform duration-200 ease-out group-hover:translate-y-0.5" aria-hidden="true" />
               </a>
             </div>
-            <ul className="rise mt-9 hidden flex-wrap gap-x-6 gap-y-2 text-sm text-muted md:flex" style={{ '--d': '680ms' }}>
-              {t.hero.trust.map((item) => (
-                <li key={item} className="flex items-center gap-1.5">
+            {/* On phones, the first two only: the device shows just below */}
+            <ul className="rise mt-5 flex flex-wrap gap-x-5 gap-y-1.5 text-[0.8125rem] text-muted md:mt-9 md:gap-x-6 md:gap-y-2 md:text-sm" style={{ '--d': '680ms' }}>
+              {t.hero.trust.map((item, index) => (
+                <li key={item} className={`flex items-center gap-1.5 ${index > 1 ? 'max-md:hidden' : ''}`}>
                   <Check className="h-4 w-4 text-accent" strokeWidth={2.6} aria-hidden="true" />
                   {item}
                 </li>

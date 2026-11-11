@@ -80,7 +80,7 @@ export default function Nav() {
 
         <div className="ml-auto flex items-center gap-2">
           <LanguageSwitch className="hidden sm:flex" />
-          <AppStoreButton compact placement="nav" />
+          <AppStoreButton compact placement="nav" qr="right" />
           <button
             type="button"
             onClick={() => menuRef.current?.showModal()}

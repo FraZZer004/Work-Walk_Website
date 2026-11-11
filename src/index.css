@@ -171,6 +171,32 @@ button, [role='tab'] {
   }
 }
 
+/* The QR codes for visitors on a computer: the one a hovered App Store button shows (AppStoreButton.jsx), and the
+   one at the end of the home page (FinalCTA.jsx). Never on touch screens, where the App Store is a tap away. */
+.qr-pop,
+.qr-tile {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .qr-tile {
+    display: flex;
+  }
+  .qr-pop {
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px) scale(0.97);
+    transition: opacity 160ms var(--ease-out), transform 200ms var(--ease-out), visibility 0s 200ms;
+  }
+  .qr-anchor:hover .qr-pop,
+  .qr-anchor:has(:focus-visible) .qr-pop {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity 200ms var(--ease-out) 140ms, transform 260ms var(--ease-out) 140ms, visibility 0s 140ms;
+  }
+}
+
 /* ---------- Backdrop: slow orange lights, a faint grid and film grain ---------- */
 
 .backdrop {
@@ -494,7 +520,7 @@ dialog.menu[open] .menu-item {
   .sheen::after, .scan-beam, .scroll-cue, .ring-pulse { display: none; animation: none; }
   .backdrop i, .orbit, .shimmer::after { animation: none; }
   .scan-row, .notif { animation: none; opacity: 1; }
-  .pop, .pop[data-hidden='true'], dialog.sheet, dialog.menu { transform: none; }
+  .pop, .pop[data-hidden='true'], dialog.sheet, dialog.menu, .qr-pop { transform: none !important; }
   dialog.menu[open] .menu-item { animation: none; }
   .acc-panel, .acc-panel[data-open='true'] { transition: none; }
   .nudge-icon { transition: none; }

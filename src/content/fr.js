@@ -7,14 +7,13 @@ export const fr = {
     support: 'Les réponses aux questions fréquentes sur Work&Walk : sessions, salaire, pas, Apple Watch et abonnement PRO. Et un contact si besoin.',
   },
   nav: { features: 'Fonctionnalités', devices: 'Montre et widget', pro: 'PRO', support: 'Aide', download: 'Télécharger' },
-  store: { small: 'Télécharger dans', big: 'l’App Store', aria: 'Télécharger dans l’App Store : Work&Walk' },
+  store: { small: 'Télécharger dans', big: 'l’App Store', aria: 'Télécharger dans l’App Store : Work&Walk', qr: 'Scanne avec l’appareil photo de ton iPhone pour installer l’app.' },
   hero: {
     title: ['Chaque pas au travail', 'compte.'],
     more: 'Découvrir l’app',
     scroll: 'Fais défiler',
-    trust: ['Sans compte', 'Sans publicité', 'Tes données restent sur ton iPhone'],
+    trust: ['Gratuit', 'Sans compte ni publicité', 'Tes données restent sur ton iPhone'],
     lede: 'Work&Walk réunit ton planning, tes pas et ton salaire. Note tes heures, vois combien tu marches pendant tes postes et connais ton net du mois, sans tableur.',
-    note: 'Gratuit · iPhone, Apple Watch et widget',
     alt: 'L’écran d’accueil de Work&Walk : pas du jour, heures travaillées et prochain objectif',
   },
   tour: {
@@ -94,6 +93,12 @@ export const fr = {
       { title: 'Santé avancée', text: 'Distance, cardio et étages, au travail et en dehors.' },
       { title: 'Un coup de pouce', text: 'Tu soutiens directement le développement de l’app.' },
     ],
+    plans: [
+      { name: 'Mensuel', price: '4,99 €', period: 'par mois', note: 'Sans engagement' },
+      { name: 'Annuel', price: '39,99 €', period: 'par an', note: 'Soit 3,33 € par mois', badge: '−33 %' },
+    ],
+    plansLabel: 'Les formules',
+    legal: 'Prix TTC en France. L’abonnement est géré par Apple et se résilie à tout moment dans les réglages de l’App Store.',
   },
   privacy: {
     eyebrow: 'Confidentialité',
@@ -106,7 +111,7 @@ export const fr = {
     note: 'Une seule exception, et seulement si tu t’en sers : l’import par IA envoie le document que tu choisis pour en lire les horaires.',
     link: 'Lire la politique de confidentialité',
   },
-  cta: { title: 'Commence par ta première session.', lede: 'Gratuit sur l’App Store. Une minute de visite guidée, puis c’est à toi.' },
+  cta: { title: 'Commence par ta première session.', lede: 'Gratuit sur l’App Store. Une minute de visite guidée, puis c’est à toi.', qr: 'Sur ordinateur ? Scanne ce code avec l’appareil photo de ton iPhone.', qrLabel: 'QR code du lien vers Work&Walk sur l’App Store' },
   footer: { updated: 'Site mis à jour le', print: 'Imprimer', nav: 'Liens utiles', tagline: 'Chaque pas au travail compte.', privacy: 'Confidentialité', support: 'Aide', contact: 'Contact', rights: 'Tous droits réservés.', apple: 'Apple, iPhone, Apple Watch et App Store sont des marques d’Apple Inc.' },
   support: {
     title: 'Aide',

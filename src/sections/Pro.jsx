@@ -1,4 +1,5 @@
 import { Check, Crown } from 'lucide-react'
+import AppStoreButton from '../components/AppStoreButton'
 import Reveal from '../components/Reveal'
 import { useLang } from '../i18n'
 
@@ -34,6 +35,32 @@ export default function Pro() {
                 </Reveal>
               ))}
             </ul>
+          </div>
+
+          {/* The two plans, with the same prices as the subscription screen of the app */}
+          <div className="relative mt-10 grid gap-6 border-t border-white/10 pt-8 md:mt-14 md:grid-cols-[1fr_auto] md:items-center md:gap-12 md:pt-12">
+            <ul aria-label={t.pro.plansLabel} className="grid gap-3 sm:grid-cols-2">
+              {t.pro.plans.map((plan) => (
+                <li
+                  key={plan.name}
+                  className={`rounded-[22px] border p-5 ${plan.badge ? 'border-accent/55 bg-accent/[0.07] shadow-[inset_0_1px_0_rgba(255,180,90,0.18)]' : 'border-white/10 bg-white/[0.03]'}`}
+                >
+                  <p className="flex items-center justify-between gap-3">
+                    <span className="font-semibold">{plan.name}</span>
+                    {plan.badge && <span className="rounded-full bg-accent px-2.5 py-0.5 text-xs font-bold tabular-nums text-white">{plan.badge}</span>}
+                  </p>
+                  <p className="mt-3 flex flex-wrap items-baseline gap-x-2">
+                    <span className="font-rounded text-[2rem] font-bold leading-none tracking-tight tabular-nums">{plan.price}</span>
+                    <span className="text-muted">{plan.period}</span>
+                  </p>
+                  <p className={`mt-2 text-sm ${plan.badge ? 'font-medium text-[#ffb766]' : 'text-muted'}`}>{plan.note}</p>
+                </li>
+              ))}
+            </ul>
+            <div className="md:max-w-[15.5rem]">
+              <AppStoreButton placement="pro" qr="up" />
+              <p className="mt-4 text-xs leading-relaxed text-faint">{t.pro.legal}</p>
+            </div>
           </div>
         </div>
       </Reveal>
