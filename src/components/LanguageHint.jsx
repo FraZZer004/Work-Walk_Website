@@ -22,11 +22,12 @@ export default function LanguageHint() {
   if (!suggested || suggested === lang) return null
   const copy = COPY[suggested]
 
+  // On phones it sits above the contact and back-to-top buttons; on larger screens, in the bottom-left corner.
   return (
     <aside
       lang={suggested}
       aria-label={copy.go}
-      className="pop glass no-print fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] left-4 right-[5.5rem] z-[45] flex items-center gap-1 rounded-full p-1.5 sm:right-auto"
+      className="pop glass no-print fixed bottom-[calc(5.25rem+env(safe-area-inset-bottom))] left-4 right-4 z-[45] flex items-center gap-1 rounded-full p-1.5 sm:bottom-[calc(1rem+env(safe-area-inset-bottom))] sm:right-auto"
     >
       <Link
         to={alternate + hash}
