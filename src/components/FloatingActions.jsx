@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUp, Check, Copy, LifeBuoy, Mail, MessageCircle, X } from 'lucide-react'
-import { useConsent } from '../consent'
 import { useScroll } from '../hooks/useScroll'
 import { useLang } from '../i18n'
 
@@ -10,7 +9,6 @@ export const SUPPORT_EMAIL = 'workandwalkapp@gmail.com'
 /** Bottom-right corner: the contact button with its panel, and "back to top" once the page has scrolled. */
 export default function FloatingActions() {
   const { t } = useLang()
-  const { bannerOpen } = useConsent()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [copied, setCopied] = useState(false)
@@ -49,7 +47,7 @@ export default function FloatingActions() {
   return (
     <div
       ref={rootRef}
-      className={`no-print fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-[calc(1rem+env(safe-area-inset-right))] z-40 flex flex-col items-end gap-3 ${bannerOpen ? 'max-sm:hidden' : ''}`}
+      className="no-print fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-[calc(1rem+env(safe-area-inset-right))] z-40 flex flex-col items-end gap-3"
     >
       <div
         id="contact-panel"

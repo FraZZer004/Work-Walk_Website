@@ -4,19 +4,22 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import { LangProvider } from './LangProvider'
-import { ConsentProvider } from './ConsentProvider'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <LangProvider>
-        <ConsentProvider>
-          <App />
-        </ConsentProvider>
+        <App />
       </LangProvider>
     </BrowserRouter>
   </StrictMode>,
 )
+
+// Earlier versions of the site kept the cookie banner's answer and the visit's campaign in the browser: tidy them up.
+try {
+  localStorage.removeItem('ww-consent')
+  sessionStorage.removeItem('ww-utm')
+} catch { /* storage unavailable */ }
 
 // The loading screen of index.html leaves once the page has painted.
 requestAnimationFrame(() => {

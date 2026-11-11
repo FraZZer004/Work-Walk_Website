@@ -104,7 +104,7 @@ export const en = {
     link: 'Read the privacy policy',
   },
   cta: { title: 'Start with your first session.', lede: 'Free on the App Store. A one-minute guided tour, then it’s over to you.' },
-  footer: { updated: 'Website updated on', cookies: 'Cookies', reset: 'Clear my preferences', resetDone: 'Preferences cleared.', print: 'Print', nav: 'Useful links', tagline: 'Every step at work counts.', privacy: 'Privacy', support: 'Support', contact: 'Contact', rights: 'All rights reserved.', apple: 'Apple, iPhone, Apple Watch and App Store are trademarks of Apple Inc.' },
+  footer: { updated: 'Website updated on', print: 'Print', nav: 'Useful links', tagline: 'Every step at work counts.', privacy: 'Privacy', support: 'Support', contact: 'Contact', rights: 'All rights reserved.', apple: 'Apple, iPhone, Apple Watch and App Store are trademarks of Apple Inc.' },
   support: {
     title: 'Support',
     lede: 'Answers to the most common questions.',
@@ -127,7 +127,7 @@ export const en = {
   },
   policy: {
     title: 'Privacy policy',
-    updated: 'Last updated: 7 October 2026',
+    updated: 'Last updated: 11 November 2026',
     sections: [
       { title: '1. Health data', text: 'With your permission, Work&Walk reads from Apple Health (HealthKit) your step count, distance travelled, active calories, heart rate and flights climbed. This data is used only to display your statistics in the app, its widget and its Apple Watch app.\nIf you turn on the “Save as workout” option, the app also writes your work sessions to Apple Health as walking workouts.\nYour health data never leaves your devices and is not used for advertising or profiling.' },
       { title: '2. Data stored on your device', text: 'Your work sessions, absences, pay estimates, profile and settings are saved locally on your device. Work&Walk requires no account and holds no copy of this data.' },
@@ -135,26 +135,13 @@ export const en = {
       { title: '4. Subscription', text: 'Purchases and subscriptions are handled by Apple. Work&Walk does not receive your name, your email address or your payment details.' },
       { title: '5. Notifications', text: 'Notifications are scheduled locally on your device based on your schedule. No server is used to send them.' },
       { title: '6. Data sharing', text: 'We do not sell, trade or transfer any of your personal data for commercial purposes. The app contains no advertising and no tracking tools.' },
-      { title: '7. This website', text: 'This website sets no advertising cookies and uses no third-party analytics. It remembers, in your browser, the language you chose and your answer to the cookie banner.\nLinks to the App Store indicate that they come from this website. If you accept, the website also keeps, for the duration of your visit, the campaign parameters (UTM) of the link that brought you here and adds them to the App Store link, in order to know where downloads come from. None of this information can identify you.\nYou can change your choice at any time with the “Cookies” link at the bottom of the page, or erase everything with “Clear my preferences”.' },
+      { title: '7. This website', text: 'This website sets no cookies and uses no analytics. It only remembers, in your browser, the language you chose.\nLinks to the App Store show that they come from this website, and from which button. If the link that brought you here contained campaign parameters (UTM), they are passed on to the App Store link, in order to know where downloads come from. This information is not stored on your device and cannot identify you.\nTo erase the remembered language, clear this website’s data in your browser settings.' },
       { title: '8. Your rights', text: 'You can withdraw access to your health data at any time in Settings > Health > Data Access & Devices > Work&Walk. You can erase all app data from Settings > Reset data, or by deleting the app.' },
       { title: '9. Contact', text: 'For any question about this policy, write to us at workandwalkapp@gmail.com.' },
     ],
   },
   a11y: { skip: 'Skip to content', menu: 'Open menu', close: 'Close', top: 'Back to top', language: 'Language', progress: 'Reading progress', loading: 'Loading…', home: 'Work&Walk, home', main: 'Main navigation' },
   faq: { eyebrow: 'Frequently asked', title: 'What people ask us most.', more: 'All questions' },
-  cookies: {
-    title: 'Cookies and measurement',
-    text: 'No advertising cookies here. If you accept, the website remembers, for the duration of your visit, the link that brought you here, so we know what gets the app discovered.',
-    more: 'Learn more',
-    accept: 'Accept',
-    decline: 'Decline',
-  },
   contact: { button: 'Contact us', title: 'A question?', text: 'Write to us, we reply as soon as we can.', email: 'Write an email', copy: 'Copy the address', copied: 'Address copied', faq: 'Browse the help page' },
-  confirm: {
-    resetTitle: 'Clear your preferences?',
-    resetText: 'The language you chose and your answer to the cookie banner will be removed from this browser. The website will go back to its original settings.',
-    resetOk: 'Clear',
-    cancel: 'Cancel',
-  },
   notFound: { title: 'Page not found', back: 'Back to home' },
 }

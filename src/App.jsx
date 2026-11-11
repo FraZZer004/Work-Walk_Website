@@ -1,7 +1,6 @@
 import { lazy, Suspense, useEffect } from 'react'
 import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import Backdrop from './components/Backdrop'
-import CookieBanner from './components/CookieBanner'
 import FloatingActions from './components/FloatingActions'
 import Nav from './components/Nav'
 import ScrollProgress from './components/ScrollProgress'
@@ -74,7 +73,6 @@ export default function App() {
       </Suspense>
       <Footer />
       <FloatingActions />
-      <CookieBanner />
     </>
   )
 }

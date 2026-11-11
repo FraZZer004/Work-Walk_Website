@@ -1,4 +1,4 @@
-import { useConsent } from '../consent'
+import { useCampaign } from '../hooks/useCampaign'
 import { useLang } from '../i18n'
 import { storeUrl } from '../utils/tracking'
 
@@ -16,8 +16,7 @@ function AppleLogo({ className }) {
  */
 export default function AppStoreButton({ placement, compact = false, className = '' }) {
   const { t } = useLang()
-  const { campaign } = useConsent()
-  const href = storeUrl(placement, campaign)
+  const href = storeUrl(placement, useCampaign())
 
   if (compact) {
     return (

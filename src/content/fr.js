@@ -104,7 +104,7 @@ export const fr = {
     link: 'Lire la politique de confidentialité',
   },
   cta: { title: 'Commence par ta première session.', lede: 'Gratuit sur l’App Store. Une minute de visite guidée, puis c’est à toi.' },
-  footer: { updated: 'Site mis à jour le', cookies: 'Cookies', reset: 'Effacer mes préférences', resetDone: 'Préférences effacées.', print: 'Imprimer', nav: 'Liens utiles', tagline: 'Chaque pas au travail compte.', privacy: 'Confidentialité', support: 'Aide', contact: 'Contact', rights: 'Tous droits réservés.', apple: 'Apple, iPhone, Apple Watch et App Store sont des marques d’Apple Inc.' },
+  footer: { updated: 'Site mis à jour le', print: 'Imprimer', nav: 'Liens utiles', tagline: 'Chaque pas au travail compte.', privacy: 'Confidentialité', support: 'Aide', contact: 'Contact', rights: 'Tous droits réservés.', apple: 'Apple, iPhone, Apple Watch et App Store sont des marques d’Apple Inc.' },
   support: {
     title: 'Aide',
     lede: 'Les réponses aux questions les plus fréquentes.',
@@ -127,7 +127,7 @@ export const fr = {
   },
   policy: {
     title: 'Politique de confidentialité',
-    updated: 'Dernière mise à jour : 7 octobre 2026',
+    updated: 'Dernière mise à jour : 11 novembre 2026',
     sections: [
       { title: '1. Données de santé', text: 'Avec votre accord, Work&Walk lit dans Apple Santé (HealthKit) votre nombre de pas, votre distance parcourue, vos calories actives, votre fréquence cardiaque et vos étages montés. Ces données servent uniquement à afficher vos statistiques dans l’application, son widget et son app Apple Watch.\nSi vous activez l’option « Enregistrer comme workout », l’application écrit aussi vos sessions de travail dans Apple Santé sous forme de séances de marche.\nVos données de santé ne quittent jamais vos appareils et ne sont utilisées ni pour de la publicité ni pour du profilage.' },
       { title: '2. Données stockées sur votre appareil', text: 'Vos sessions de travail, vos absences, vos estimations de salaire, votre profil et vos réglages sont enregistrés localement sur votre appareil. Work&Walk ne demande aucun compte et ne possède aucune copie de ces données.' },
@@ -135,26 +135,13 @@ export const fr = {
       { title: '4. Abonnement', text: 'Les achats et les abonnements sont gérés par Apple. Work&Walk ne reçoit ni votre nom, ni votre adresse e-mail, ni vos moyens de paiement.' },
       { title: '5. Notifications', text: 'Les notifications sont programmées localement sur votre appareil à partir de votre planning. Aucun serveur n’est utilisé pour les envoyer.' },
       { title: '6. Partage des données', text: 'Nous ne vendons, n’échangeons et ne transférons aucune de vos données personnelles à des fins commerciales. L’application ne contient ni publicité ni outil de suivi.' },
-      { title: '7. Ce site', text: 'Ce site ne dépose aucun cookie publicitaire et n’utilise aucun outil de mesure d’audience tiers. Il mémorise dans votre navigateur la langue que vous avez choisie et votre réponse au bandeau cookies.\nLes liens vers l’App Store indiquent qu’ils proviennent de ce site. Si vous l’acceptez, le site conserve aussi, le temps de votre visite, les paramètres de campagne (UTM) du lien par lequel vous êtes arrivé et les ajoute au lien vers l’App Store, afin de savoir d’où viennent les téléchargements. Aucune de ces informations ne permet de vous identifier.\nVous pouvez modifier votre choix à tout moment avec le lien « Cookies » en bas de page, ou tout effacer avec « Effacer mes préférences ».' },
+      { title: '7. Ce site', text: 'Ce site ne dépose aucun cookie et n’utilise aucun outil de mesure d’audience. Il retient seulement, dans votre navigateur, la langue que vous avez choisie.\nLes liens vers l’App Store indiquent qu’ils viennent de ce site et depuis quel bouton. Si le lien qui vous a amené ici contenait des paramètres de campagne (UTM), ils sont transmis au lien vers l’App Store, afin de savoir d’où viennent les téléchargements. Ces informations ne sont pas enregistrées sur votre appareil et ne permettent pas de vous identifier.\nPour effacer la langue retenue, effacez les données de ce site dans les réglages de votre navigateur.' },
       { title: '8. Vos droits', text: 'Vous pouvez retirer l’accès à vos données de santé à tout moment dans Réglages > Santé > Accès aux données et appareils > Work&Walk. Vous pouvez effacer toutes les données de l’application depuis Paramètres > Réinitialiser les données, ou en supprimant l’application.' },
       { title: '9. Contact', text: 'Pour toute question concernant cette politique, écrivez-nous à workandwalkapp@gmail.com.' },
     ],
   },
   a11y: { skip: 'Aller au contenu', menu: 'Ouvrir le menu', close: 'Fermer', top: 'Retour en haut de page', language: 'Langue', progress: 'Progression dans la page', loading: 'Chargement…', home: 'Work&Walk, accueil', main: 'Navigation principale' },
   faq: { eyebrow: 'Questions fréquentes', title: 'Ce qu’on nous demande le plus.', more: 'Toutes les questions' },
-  cookies: {
-    title: 'Cookies et mesure',
-    text: 'Aucun cookie publicitaire ici. Si tu l’acceptes, le site retient, le temps de ta visite, le lien par lequel tu es arrivé, pour savoir ce qui fait connaître l’app.',
-    more: 'En savoir plus',
-    accept: 'Accepter',
-    decline: 'Refuser',
-  },
   contact: { button: 'Nous contacter', title: 'Une question ?', text: 'Écris-nous, on te répond dès que possible.', email: 'Écrire un e-mail', copy: 'Copier l’adresse', copied: 'Adresse copiée', faq: 'Consulter l’aide' },
-  confirm: {
-    resetTitle: 'Effacer tes préférences ?',
-    resetText: 'La langue choisie et ta réponse au bandeau cookies seront supprimées de ce navigateur. Le site reviendra à ses réglages d’origine.',
-    resetOk: 'Effacer',
-    cancel: 'Annuler',
-  },
   notFound: { title: 'Page introuvable', back: 'Retour à l’accueil' },
 }

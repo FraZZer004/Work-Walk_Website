@@ -34,10 +34,6 @@ export function LangProvider({ children }) {
       setLangState(next)
       try { localStorage.setItem(STORAGE_KEY, next) } catch { /* ignore */ }
     },
-    resetLang: () => {
-      try { localStorage.removeItem(STORAGE_KEY) } catch { /* ignore */ }
-      setLangState(browserLanguage())
-    },
   }), [lang, t])
 
   return <LangContext.Provider value={value}>{children}</LangContext.Provider>
