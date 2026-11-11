@@ -224,14 +224,14 @@ button, [role='tab'] {
 
 /* ---------- Entrances ---------- */
 
-/* Scroll reveal: fade and rise once */
-.reveal {
+/* Scroll reveal: fade and rise once (only when scripts run: without them, everything is simply there) */
+.js .reveal {
   opacity: 0;
   transform: translateY(22px);
   transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out);
   transition-delay: var(--d, 0ms);
 }
-.reveal.is-in {
+.js .reveal.is-in {
   opacity: 1;
   transform: none;
 }
@@ -284,7 +284,7 @@ button, [role='tab'] {
 }
 /* ...and its copy in the scrolling flow is kept for screen readers only */
 @media screen and (max-width: 767.98px) {
-  .screen-sm-sr-only {
+  .js .screen-sm-sr-only {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -484,7 +484,7 @@ dialog.menu[open] .menu-item {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { transform: none; transition: opacity 300ms ease; }
+  .js .reveal { transform: none; transition: opacity 300ms ease; }
   .panel-step { transform: none; }
   .word { transform: none; filter: none; animation: fadeOnly 400ms ease forwards; }
   .rise { transform: none; animation: fadeOnly 400ms ease forwards; }

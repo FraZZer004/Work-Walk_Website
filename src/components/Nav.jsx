@@ -3,30 +3,41 @@ import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import AppStoreButton from './AppStoreButton'
 import { useLang } from '../i18n'
+import { pageOf } from '../routes'
 
+const LANGUAGE_NAMES = { fr: 'Français', en: 'English' }
+
+/** FR / EN: a link to the same page in the other language, at the same place on the page. */
 function LanguageSwitch({ className = '' }) {
-  const { lang, setLang, t } = useLang()
+  const { lang, t, alternate, rememberLang } = useLang()
+  const { hash } = useLocation()
+  const pill = 'flex h-8 items-center rounded-full px-3 uppercase'
   return (
     <div className={`h-10 items-center rounded-full bg-white/[0.07] p-1 text-[0.8125rem] font-semibold ${className}`} role="group" aria-label={t.a11y.language}>
-      {['fr', 'en'].map((code) => (
-        <button
+      {['fr', 'en'].map((code) => (code === lang ? (
+        <span key={code} aria-current="true" aria-label={LANGUAGE_NAMES[code]} className={`${pill} bg-white/[0.16] text-ink`}>{code}</span>
+      ) : (
+        <Link
           key={code}
-          type="button"
-          onClick={() => setLang(code)}
-          aria-pressed={lang === code}
-          className={`pressable h-8 rounded-full px-3 uppercase ${lang === code ? 'bg-white/[0.16] text-ink' : 'text-muted hover:text-ink'}`}
+          to={alternate + hash}
+          state={{ keepScroll: true }}
+          onClick={() => rememberLang(code)}
+          hrefLang={code}
+          lang={code}
+          aria-label={LANGUAGE_NAMES[code]}
+          className={`pressable ${pill} text-muted hover:text-ink`}
         >
           {code}
-        </button>
-      ))}
+        </Link>
+      )))}
     </div>
   )
 }
 
 function Brand({ onClick }) {
-  const { t } = useLang()
+  const { t, to } = useLang()
   return (
-    <Link to="/" onClick={onClick} aria-label={t.a11y.home} className="pressable flex items-center gap-2.5 font-semibold tracking-tight">
+    <Link to={to('home')} onClick={onClick} aria-label={t.a11y.home} className="pressable flex items-center gap-2.5 font-semibold tracking-tight">
       <img src="/icon-192.jpg" alt="" width="30" height="30" className="h-[1.875rem] w-[1.875rem] rounded-[8px]" />
       <span>Work&amp;Walk</span>
     </Link>
@@ -35,7 +46,7 @@ function Brand({ onClick }) {
 
 /** The bar that stays at the top of every page, and the full menu it opens on small screens. */
 export default function Nav() {
-  const { t } = useLang()
+  const { t, to } = useLang()
   const { pathname, hash } = useLocation()
   const menuRef = useRef(null)
 
@@ -45,7 +56,7 @@ export default function Nav() {
   // A section link scrolls even when its hash is already in the address bar.
   const toSection = (id) => () => {
     closeMenu()
-    if (pathname === '/') document.getElementById(id)?.scrollIntoView()
+    if (pageOf(pathname) === 'home') document.getElementById(id)?.scrollIntoView()
   }
   const sections = [
     { id: 'features', label: t.nav.features },
@@ -60,11 +71,11 @@ export default function Nav() {
 
         <div className="ml-6 hidden items-center gap-6 text-sm text-muted md:flex">
           {sections.map((section) => (
-            <Link key={section.id} to={`/#${section.id}`} onClick={toSection(section.id)} className="transition-colors duration-150 hover:text-ink">
+            <Link key={section.id} to={to('home', `#${section.id}`)} onClick={toSection(section.id)} className="transition-colors duration-150 hover:text-ink">
               {section.label}
             </Link>
           ))}
-          <Link to="/support" className="transition-colors duration-150 hover:text-ink">{t.nav.support}</Link>
+          <Link to={to('support')} className="transition-colors duration-150 hover:text-ink">{t.nav.support}</Link>
         </div>
 
         <div className="ml-auto flex items-center gap-2">
@@ -99,14 +110,14 @@ export default function Nav() {
           <ul className="mt-5">
             {sections.map((section, index) => (
               <li key={section.id} className="menu-item border-b border-white/[0.07]" style={{ '--i': index }}>
-                <Link to={`/#${section.id}`} onClick={toSection(section.id)} className="title block py-3.5 text-[1.625rem]">{section.label}</Link>
+                <Link to={to('home', `#${section.id}`)} onClick={toSection(section.id)} className="title block py-3.5 text-[1.625rem]">{section.label}</Link>
               </li>
             ))}
             <li className="menu-item border-b border-white/[0.07]" style={{ '--i': 3 }}>
-              <Link to="/support" onClick={closeMenu} className="title block py-3.5 text-[1.625rem]">{t.nav.support}</Link>
+              <Link to={to('support')} onClick={closeMenu} className="title block py-3.5 text-[1.625rem]">{t.nav.support}</Link>
             </li>
             <li className="menu-item" style={{ '--i': 4 }}>
-              <Link to="/privacy" onClick={closeMenu} className="title block py-3.5 text-[1.625rem]">{t.footer.privacy}</Link>
+              <Link to={to('privacy')} onClick={closeMenu} className="title block py-3.5 text-[1.625rem]">{t.footer.privacy}</Link>
             </li>
           </ul>
 

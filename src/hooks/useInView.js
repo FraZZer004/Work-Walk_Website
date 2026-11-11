@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 export function useInView(margin = '0px 0px -12% 0px') {
   const ref = useRef(null)
   // Without IntersectionObserver (very old browsers), everything is simply visible.
-  const [inView, setInView] = useState(() => !('IntersectionObserver' in window))
+  const [inView, setInView] = useState(() => typeof window !== 'undefined' && !('IntersectionObserver' in window))
 
   useEffect(() => {
     const el = ref.current

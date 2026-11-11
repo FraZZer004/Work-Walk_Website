@@ -38,7 +38,7 @@ export default function WatchCanvas({ alt }) {
     <div className="relative aspect-[4/3] w-full" role="img" aria-label={alt}>
       <canvas ref={canvasRef} aria-hidden="true" className={`h-full w-full transition-opacity duration-700 ${status === 'ready' ? 'opacity-100' : 'opacity-0'}`} />
       {status === 'loading' && (
-        <div className="no-print absolute inset-0 flex items-center justify-center" aria-hidden="true">
+        <div className="stage-placeholder no-print absolute inset-0 flex items-center justify-center" aria-hidden="true">
           <div className="shimmer aspect-[87/100] h-[58%] rounded-[28%]" />
         </div>
       )}

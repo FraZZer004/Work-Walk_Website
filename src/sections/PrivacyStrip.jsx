@@ -7,7 +7,7 @@ import { trackPointer } from '../utils/pointer'
 const icons = [Smartphone, HeartPulse, EyeOff]
 
 export default function PrivacyStrip() {
-  const { t } = useLang()
+  const { t, to } = useLang()
 
   return (
     <section className="mx-auto max-w-6xl px-5 py-24 md:py-32">
@@ -17,7 +17,7 @@ export default function PrivacyStrip() {
           <p className="eyebrow mt-6">{t.privacy.eyebrow}</p>
           <h2 className="title mt-3 text-[clamp(2rem,4.8vw,3.5rem)]">{t.privacy.title}</h2>
           <p className="mt-6 text-[0.9375rem] text-muted">{t.privacy.note}</p>
-          <Link to="/privacy" className="nudge pressable mt-6 inline-flex items-center gap-1.5 font-semibold text-accent hover:text-[#ffb040]">
+          <Link to={to('privacy')} className="nudge pressable mt-6 inline-flex items-center gap-1.5 font-semibold text-accent hover:text-[#ffb040]">
             {t.privacy.link}
             <ArrowRight className="nudge-icon h-4 w-4" aria-hidden="true" />
           </Link>

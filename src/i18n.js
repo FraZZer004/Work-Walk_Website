@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react'
-import { en } from './content/en'
+import { fr } from './content/fr'
 
-export const LangContext = createContext({ lang: 'en', t: en, setLang: () => {} })
+export const LangContext = createContext({ lang: 'fr', t: fr, to: () => '/', alternate: '/en/', rememberLang: () => {} })
 
-/** Current language, its dictionary, and its setter. */
+/** The current language, its dictionary, and the addresses of the site's pages in it. */
 export const useLang = () => useContext(LangContext)

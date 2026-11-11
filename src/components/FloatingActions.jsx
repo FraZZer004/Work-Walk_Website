@@ -8,7 +8,7 @@ export const SUPPORT_EMAIL = 'workandwalkapp@gmail.com'
 
 /** Bottom-right corner: the contact button with its panel, and "back to top" once the page has scrolled. */
 export default function FloatingActions() {
-  const { t } = useLang()
+  const { t, to } = useLang()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [copied, setCopied] = useState(false)
@@ -69,7 +69,7 @@ export default function FloatingActions() {
             {copied ? <Check className="h-5 w-5 text-accent" aria-hidden="true" /> : <Copy className="h-5 w-5 text-accent" aria-hidden="true" />}
             <span aria-live="polite">{copied ? t.contact.copied : t.contact.copy}</span>
           </button>
-          <Link to="/support" onClick={() => setOpen(false)} className={row}>
+          <Link to={to('support')} onClick={() => setOpen(false)} className={row}>
             <LifeBuoy className="h-5 w-5 text-accent" aria-hidden="true" />
             {t.contact.faq}
           </Link>

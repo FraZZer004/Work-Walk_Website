@@ -125,7 +125,7 @@ export default function Showcase() {
           className={`h-full w-full transition-opacity duration-700 ${status === 'ready' ? 'opacity-100' : 'opacity-0'}`}
         />
         {status === 'loading' && (
-          <div className="absolute inset-0 mx-auto grid max-w-6xl px-5 md:grid-cols-2" aria-hidden="true">
+          <div className="stage-placeholder absolute inset-0 mx-auto grid max-w-6xl px-5 md:grid-cols-2" aria-hidden="true">
             <div className="col-start-1 flex items-end justify-center pb-16 md:col-start-2 md:items-center md:pb-0">
               <div className="spinner md:hidden" />
               <div className="shimmer hidden aspect-[716/1500] h-[68vh] rounded-[3.2rem] md:block" />

@@ -1,7 +1,10 @@
 export const fr = {
   meta: {
-    title: 'Work&Walk — Chaque pas au travail compte',
-    description: 'Work&Walk réunit ton planning, tes pas et ton salaire dans une seule app iPhone. Gratuit sur l’App Store.',
+    title: 'Work&Walk — Planning, pas et salaire sur iPhone',
+    share: 'Work&Walk — Chaque pas au travail compte',
+    description: 'Note tes heures de travail, vois combien de pas tu fais pendant tes postes et estime ton salaire net du mois. Gratuit sur iPhone, avec Apple Watch et widget.',
+    privacy: 'La politique de confidentialité de Work&Walk : vos données restent sur votre appareil, sans compte, sans publicité ni outil de suivi.',
+    support: 'Les réponses aux questions fréquentes sur Work&Walk : sessions, salaire, pas, Apple Watch et abonnement PRO. Et un contact si besoin.',
   },
   nav: { features: 'Fonctionnalités', devices: 'Montre et widget', pro: 'PRO', support: 'Aide', download: 'Télécharger' },
   store: { small: 'Télécharger dans', big: 'l’App Store', aria: 'Télécharger dans l’App Store : Work&Walk' },

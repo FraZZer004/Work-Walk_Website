@@ -1,7 +1,10 @@
 export const en = {
   meta: {
-    title: 'Work&Walk — Every step at work counts',
-    description: 'Work&Walk brings your work schedule, your steps and your pay together in one iPhone app. Free on the App Store.',
+    title: 'Work&Walk — Work schedule, steps and pay on iPhone',
+    share: 'Work&Walk — Every step at work counts',
+    description: 'Log your working hours, see how many steps you take during your shifts and estimate your net pay for the month. Free on iPhone, with Apple Watch and widget.',
+    privacy: 'The Work&Walk privacy policy: your data stays on your device, with no account, no ads and no tracking.',
+    support: 'Answers to common questions about Work&Walk: sessions, pay, steps, Apple Watch and the PRO subscription. And a way to reach us.',
   },
   nav: { features: 'Features', devices: 'Watch & widget', pro: 'PRO', support: 'Support', download: 'Download' },
   store: { small: 'Download on the', big: 'App Store', aria: 'Download on the App Store: Work&Walk' },

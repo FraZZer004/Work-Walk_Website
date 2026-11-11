@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from 'react'
 import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import Backdrop from './components/Backdrop'
 import FloatingActions from './components/FloatingActions'
+import LanguageHint from './components/LanguageHint'
 import Nav from './components/Nav'
 import ScrollProgress from './components/ScrollProgress'
 import Footer from './sections/Footer'
@@ -12,16 +13,20 @@ import { useLang } from './i18n'
 const Privacy = lazy(() => import('./pages/Privacy'))
 const Support = lazy(() => import('./pages/Support'))
 
-/** A new page starts at the top; a link to a section (/#pro) scrolls to it. */
+/**
+ * A new page starts at the top; a link to a section (/#pro) scrolls to it.
+ * Switching language opens the same page in the other language and stays where the visitor was.
+ */
 function ScrollManager() {
-  const { pathname, hash } = useLocation()
+  const { pathname, hash, state } = useLocation()
   useEffect(() => {
+    if (state?.keepScroll) return
     if (hash) {
       document.getElementById(hash.slice(1))?.scrollIntoView()
     } else {
       window.scrollTo({ top: 0, behavior: 'instant' })
     }
-  }, [pathname, hash])
+  }, [pathname, hash, state])
   return null
 }
 
@@ -35,12 +40,12 @@ function PageLoader() {
 }
 
 function NotFound() {
-  const { t } = useLang()
+  const { t, to } = useLang()
   return (
     <main id="main" tabIndex={-1} className="page mx-auto flex min-h-[80svh] max-w-3xl flex-col items-center justify-center px-5 text-center outline-none">
       <p className="display text-flame text-[6rem]">404</p>
       <h1 className="title mt-2 text-3xl">{t.notFound.title}</h1>
-      <Link to="/" className="mt-6 font-semibold text-accent">{t.notFound.back}</Link>
+      <Link to={to('home')} className="mt-6 font-semibold text-accent">{t.notFound.back}</Link>
     </main>
   )
 }
@@ -65,14 +70,16 @@ export default function App() {
       <p className="print-only px-5 pt-4 text-sm">Work&amp;Walk — https://workandwalk.eu</p>
       <Suspense fallback={<PageLoader />}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/support" element={<Support />} />
+          {/* One route per page for both languages: switching language keeps the page (and its 3D phone) in place. */}
+          <Route path="/en?" element={<Home />} />
+          <Route path="/en?/privacy" element={<Privacy />} />
+          <Route path="/en?/support" element={<Support />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       <Footer />
       <FloatingActions />
+      <LanguageHint />
     </>
   )
 }
