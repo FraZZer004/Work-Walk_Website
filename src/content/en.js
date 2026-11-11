@@ -115,7 +115,7 @@ export const en = {
       { name: 'Annual', price: '€39.99', period: 'a year', note: 'That’s €3.33 a month', badge: '−33%' },
     ],
     plansLabel: 'Plans',
-    legal: 'Prices in euros, including VAT, as in France: the App Store shows the price for your country. Apple manages the subscription, which you can cancel at any time in your App Store settings.',
+    legal: 'Prices in France, including VAT: the App Store shows the ones for your country. Apple manages the subscription, which you can cancel anytime in your App Store settings.',
   },
   privacy: {
     eyebrow: 'Privacy',
@@ -139,6 +139,7 @@ export const en = {
     print: 'Print this page',
     faq: [
       { q: 'Is the app free?', a: 'Yes. The schedule, step tracking and pay estimate are free. The optional PRO subscription adds AI import, unlimited history, PDF and CSV export and advanced health metrics.' },
+      { q: 'How much does PRO cost?', a: '€4.99 a month with no commitment, or €39.99 a year, which is €3.33 a month. These are the prices in France, including VAT: the App Store shows the price for your country. You can cancel at any time in your App Store settings.' },
       { q: 'How do I add a work session?', a: 'Open the Schedule tab and tap the + button. Choose the start and end, add your break if you have one, then save. To fill a whole month, turn on the typical schedule in settings: a button then appears in the schedule to generate the sessions.' },
       { q: 'How is my pay calculated?', a: 'From your sessions, your hourly rate and your deduction percentage. You can add tiered overtime, night and Sunday bonuses, paid leave and public holidays, and deduct the break. Everything is set from the Salary tab. The result is an estimate, not a payslip.' },
       { q: 'I can’t see my steps — what should I do?', a: 'Check that Work&Walk has access to Health: iPhone Settings > Health > Data Access & Devices > Work&Walk. Then reopen the app: figures refresh every time you return.' },
@@ -147,6 +148,7 @@ export const en = {
       { q: 'How do I change plan or manage my subscription?', a: 'In the app, open settings (the gear on the home screen), then the Subscription section. You can switch between monthly and annual there, or open your App Store subscription management.' },
       { q: 'I have an offer code — where do I enter it?', a: 'Open the subscription screen and tap “I have a code” at the bottom. You can also use the link you received directly.' },
       { q: 'Does the app work with Apple Watch?', a: 'Yes. The Apple Watch app shows your steps, hours, pay for the day and next goal, and a complication can show your steps on the watch face.' },
+      { q: 'Which devices does the app work on?', a: 'On iPhone, with iOS 26.2 or later. The Apple Watch app needs watchOS 26.1 or later.' },
       { q: 'How do I replay the guided tour?', a: 'In settings, under Help, tap “Replay the guided tour”. It uses sample data and does not change yours.' },
     ],
   },
