@@ -2,6 +2,7 @@ export const en = {
   meta: {
     title: 'Work&Walk — Work schedule, steps and pay on iPhone',
     share: 'Work&Walk — Every step at work counts',
+    shareAlt: 'The Schedule, Dashboard and Salary screens of Work&Walk on three iPhones, under the title “Every step at work counts.”',
     description: 'Log your working hours, see how many steps you take during your shifts and estimate your net pay for the month. Free on iPhone, with Apple Watch and widget.',
     privacy: 'The Work&Walk privacy policy: your data stays on your device, with no account, no ads and no tracking.',
     support: 'Answers to common questions about Work&Walk: sessions, pay, steps, Apple Watch and the PRO subscription. And a way to reach us.',

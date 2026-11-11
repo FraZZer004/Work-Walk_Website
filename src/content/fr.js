@@ -2,6 +2,7 @@ export const fr = {
   meta: {
     title: 'Work&Walk — Planning, pas et salaire sur iPhone',
     share: 'Work&Walk — Chaque pas au travail compte',
+    shareAlt: 'Les écrans Planning, Tableau de bord et Salaire de Work&Walk sur trois iPhone, sous le titre « Chaque pas au travail compte. »',
     description: 'Note tes heures de travail, vois combien de pas tu fais pendant tes postes et estime ton salaire net du mois. Gratuit sur iPhone, avec Apple Watch et widget.',
     privacy: 'La politique de confidentialité de Work&Walk : vos données restent sur votre appareil, sans compte, sans publicité ni outil de suivi.',
     support: 'Les réponses aux questions fréquentes sur Work&Walk : sessions, salaire, pas, Apple Watch et abonnement PRO. Et un contact si besoin.',

@@ -52,7 +52,8 @@ export function headTags(lang, page) {
   const t = dictionaries[lang]
   const meta = pageMeta(lang, page)
   const url = page ? SITE_URL + pathOf(lang, page) : null
-  const image = `${SITE_URL}/app-icon.jpg`
+  // Link previews (messages, social networks): the header of the app's page, in the page's language.
+  const image = `${SITE_URL}/og-${lang}.jpg`
 
   const tags = [
     `<title>${escape(meta.title)}</title>`,
@@ -74,7 +75,11 @@ export function headTags(lang, page) {
     `<meta property="og:title" content="${escape(page === 'home' ? t.meta.share : meta.title)}" />`,
     `<meta property="og:description" content="${escape(meta.description)}" />`,
     `<meta property="og:image" content="${image}" />`,
-    '<meta name="twitter:card" content="summary" />',
+    '<meta property="og:image:type" content="image/jpeg" />',
+    '<meta property="og:image:width" content="1200" />',
+    '<meta property="og:image:height" content="630" />',
+    `<meta property="og:image:alt" content="${escape(t.meta.shareAlt)}" />`,
+    '<meta name="twitter:card" content="summary_large_image" />',
   )
   if (url) tags.push(`<meta property="og:url" content="${url}" />`)
   if (page) tags.push(`<script type="application/ld+json">${json(structuredData(lang, page))}</script>`)
